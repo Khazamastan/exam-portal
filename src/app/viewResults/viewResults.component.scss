@@ -28,28 +28,33 @@
 }
 .admin-page {
   margin: 0 auto auto auto;
-  .form{
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), 0 2px 1px 0 rgba(0, 0, 0, 0.24);
-    box-shadow: none;
-    margin-top : 3%;
+  .content{
+    max-width: 80%;
+    margin: auto;
+    background: #fff;
+    padding: 15px 40px;
     border-radius: 3px;
-    h1{
-      margin: 0 0 30px 0; 
+    margin-top: 30px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), 0 2px 1px 0 rgba(0, 0, 0, 0.24);
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px  solid #f5f5f5;
     }
-    .col{
-      display: flex;
-      align-items: center;
-      label{
-        width : 150px;
+    tr{
+      th{
+        background: $success-color;
+        color: #fff;
       }
-      input{
-        width: 100px;
-        padding: 10px;
-        margin: 0px;
-        &[type='file']{
-          width : 250px;
-        }
-      }
+    }
+    td, th {
+        text-align: left;
+        padding: 15px;
+    }
+  
+    tr:nth-child(even) {
+        background-color: #f5f5f5;
     }
   }
 }

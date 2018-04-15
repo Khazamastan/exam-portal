@@ -13,9 +13,39 @@ export class RegisterComponent {
         email : '',
         password : '',
         branch : '',
-        phone : 0,
+        phone : '',
         course : ''
     };
+    courses = [{
+        name : "B.Tech",
+        id: "btech"
+    },{
+        name : "MCA",
+        id: "mca"
+    }];
+
+    branches = [{
+        name : "Computer Science Engineering",
+        id: "cse"
+    },{
+        name : "Electronics and Communication Engineering",
+        id: "ece"
+    },{
+        name : "Electrical engineering",
+        id: "ee"
+    },{
+        name : "Mechanical Engineering",
+        id: "me"
+    },{
+        name : "Information Technology Engineering",
+        id: "it"
+    },{
+        name : "Civil Engineering",
+        id: "ce"
+    },{
+        name : "Chemical Engineering",
+        id: "che"
+    }];
     onSubmit(e){
         //TODO : Do login here.
     }

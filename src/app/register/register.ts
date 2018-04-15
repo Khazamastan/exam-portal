@@ -4,6 +4,6 @@ export class NewUser {
     email : string;
     password : string;
     branch : string;
-    phone : number;
+    phone : string;
     course : string;
 }

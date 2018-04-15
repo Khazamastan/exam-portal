@@ -7,14 +7,19 @@ import { LoginComponent } from './login/login.component';
 import { ExamComponent } from './exam/exam.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './routing/app-routing.module';
-
+import { AdminComponent } from "./admin/admin.component";
+import { AdminAddComponent }  from './addQuestions/addQuestions.component';
+import { AdminResultsComponent }  from './viewResults/viewResults.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    ExamComponent
+    ExamComponent,
+    AdminComponent,
+    AdminAddComponent,
+    AdminResultsComponent
   ],
   imports: [
     BrowserModule,

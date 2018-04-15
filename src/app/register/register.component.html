@@ -29,6 +29,20 @@
             placeholder="Contact Number"
             [(ngModel)]="newUser.phone"
         />
+        <select class="full" [(ngModel)]="newUser.course" name="course">
+            <option value="">
+                Select Course
+            </option>
+            <option class="" *ngFor="let course of courses" value="{{course.id}}">
+                {{course.name}}
+            </option>
+        </select>
+        <select class="full" [(ngModel)]="newUser.branch" name="branch">
+                <option value="">Select Branch</option>
+            <option *ngFor="let branch of branches" value="{{branch.id}}">
+                {{branch.name}}
+            </option>
+        </select>
         <input
             type="password"
             name="password"

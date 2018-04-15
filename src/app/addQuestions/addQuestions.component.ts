@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  templateUrl: './addQuestions.component.html',
+  styleUrls: ['./addQuestions.component.scss']
 })
-export class AdminComponent {
+export class AdminAddComponent {
     onSubmit(e){
         //TODO : Do login here.
     }
