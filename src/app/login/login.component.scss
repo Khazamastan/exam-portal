@@ -1,0 +1,13 @@
+
+.login-page {
+    width:380px;
+    padding: 10% 0 0;
+    margin: auto;
+  }
+
+  @media only screen and (max-wdith : 786px){
+    .login-page {
+        max-width: 100%;
+        padding: 0;
+    }
+  }

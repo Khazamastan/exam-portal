@@ -1,0 +1,28 @@
+<div id="app">
+<div class="login-page">
+    <div class="form">
+        <form 
+            class="login-form" 
+            (ngSubmit)="onSubmit($event)"
+        >
+        <input
+            type="text"
+            name="username"
+            placeholder="username"
+            [(ngModel)]="login.username"
+        />
+        <input
+            type="password"
+            name="password"
+            placeholder="password"
+            [(ngModel)]="login.password"
+        />
+        <button class="btn btn-full" type="submit">login</button>
+        <!-- {{this.props.error ? <p class="error-text">{{this.props.error ? "Username or DOB is wrong, Please Correct" : ""}</p> : null} -->
+        </form>
+        <p>
+            Not a registerd user <a routerLink="/register">Register</a>
+        </p>
+    </div>
+</div>
+</div>

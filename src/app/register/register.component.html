@@ -1,0 +1,46 @@
+<div id="app">
+<div class="register-page">
+    <div class="form">
+        <form 
+            class="login-form" 
+            (ngSubmit)="onSubmit($event)"
+        >
+        <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            [(ngModel)]="newUser.firstName"
+        />
+        <input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            [(ngModel)]="newUser.lastName"
+        />
+        <input
+            type="text"
+            name="email"
+            placeholder="Email"
+            [(ngModel)]="newUser.email"
+        />
+        <input
+            type="phone"
+            name="phone"
+            placeholder="Contact Number"
+            [(ngModel)]="newUser.phone"
+        />
+        <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            [(ngModel)]="newUser.password"
+        />
+        <button class="btn btn-full" type="submit">Sign Up</button>
+        <!-- {{this.props.error ? <p class="error-text">{{this.props.error ? "Username or DOB is wrong, Please Correct" : ""}</p> : null} -->
+        </form>
+        <p>
+            Already registerd user <a routerLink="/login">Login</a>
+        </p>
+    </div>
+</div>
+</div>

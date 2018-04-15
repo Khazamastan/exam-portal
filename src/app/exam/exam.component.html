@@ -1,0 +1,69 @@
+<article class="exam-page">
+  <section class="exam-heading">
+    <h1 class="heading">Welcome, User</h1>
+    <button class="btn btn-logout">Log Out</button>
+  </section>
+  <div *ngIf="!testCompleted" class="test-progress">
+    <section class="info-badge">
+      <p>Question : 1</p>
+      <p>Time Remaining: 10:00</p>
+    </section>
+    <div class="exam-content">
+      <section class="current-question">
+        <p class="question-desc">{{currentQuestion.question}}</p>
+        <ul>
+            <li *ngFor="let answer of currentQuestion.answers; let i = index">
+              <label 
+                for="{{i}}" 
+                (click)="setCurrentAnswer(currentQuestion.question._id, i)"
+              >
+                  <input 
+                    type="radio" 
+                    id="{{i}}"
+                    class="option-input radio"
+                    name="selectedAnswer"
+                    value="{{i == selectedAnswer}}"
+                  />
+                  {{answer}}
+              </label>
+            </li>
+        </ul>
+        <div class="question-footer clearfix">
+            <button 
+              class="btn pull-right" 
+              (click)="setCurrentQuestionIndex(questionIndex+1)"
+              [disabled]="!selectedAnswer"
+              [ngClass]="{'disabled': !selectedAnswer}"
+              *ngIf="(questionIndex+1) < this.questions.length"
+            >
+              Next Question
+            </button>
+            <button 
+              class="btn pull-right" 
+              (click)="submitTest()"
+              [disabled]="!selectedAnswer"
+              [ngClass]="{'disabled': !selectedAnswer}"
+              *ngIf="questions.length == (questionIndex+1)"
+            >
+              Submit
+            </button>
+        </div>
+      </section>
+      <section class="all-questions">
+          <ul>
+            <li 
+              *ngFor="let question of questions; let i = index" 
+              (click)="setCurrentQuestionIndex(i)"
+              [ngClass]="{'active': currentQuestion._id == question._id}"
+            >
+              <a>{{i+1}}</a>
+            </li>
+          </ul>
+      </section>
+    </div>
+  </div>
+  <div class="test-completed" *ngIf="testCompleted">
+      <img [src]="testCompletedImage"/>
+      <p>Test Completed</p>
+  </div>
+</article>

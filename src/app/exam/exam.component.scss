@@ -1,0 +1,179 @@
+@import "../../assets/scss/variables";
+
+.exam-page{
+    @keyframes click-wave {
+        0% {
+            height: 25px;
+            width: 25px;
+            opacity: 0.35;
+            position: relative;
+        }
+        100% {
+            height: 200px;
+            width: 200px;
+            margin-left: -80px;
+            margin-top: -80px;
+            opacity: 0;
+        }
+    }
+
+    .option-input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        position: relative;
+        top: 5px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        transition: all 0.1s ease-out 0s;
+        background: #cbd1d8;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 0.5rem;
+        outline: none;
+        position: relative;
+        z-index: 1000;
+    }
+    .option-input:hover {
+        background: #9faab7;
+    }
+    .option-input:checked {
+        background: #40e0d0;
+    }
+    .option-input:checked::before {
+        height: 25px;
+        width: 25px;
+        position: absolute;
+        content: '✔';
+        display: inline-block;
+        font-size: 16px;
+        text-align: center;
+        line-height: 25px;
+    }
+    .option-input:checked::after {
+        -webkit-animation: click-wave 0.65s;
+        -moz-animation: click-wave 0.65s;
+        animation: click-wave 0.65s;
+        background: #40e0d0a8;
+        content: '';
+        display: block;
+        position: relative;
+        z-index: 100;
+    }
+    .option-input.radio {
+        border-radius: 50%;
+    }
+    .option-input.radio::after {
+        border-radius: 50%;
+    }
+
+    label {
+        display: block;
+        line-height: 25px;
+    }
+    
+}
+.exam-page > .exam-heading{
+    display: flex;
+    justify-content: space-between;
+    height : 50px;
+    background-color: #000000;
+    padding: 0 0 0 10px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), 0 2px 1px 0 rgba(0, 0, 0, 0.24);
+}
+.exam-page > .exam-heading > h1{
+    color : #fff;
+    margin : 0;
+    font-size: 24px;
+    line-height : 50px;
+    font-weight: 500;
+}
+.info-badge{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $border-color;
+    padding: 0 10px;
+}
+.info-badge p{
+    margin: 10px 0;
+    font-weight: 500;
+}
+.exam-page  .exam-content{
+    display: flex;
+}
+.current-question{
+    flex : 1;
+}
+
+.btn-logout{
+    width : 120px;
+}
+
+//all questions
+.all-questions{
+    min-width : 300px;
+    flex : 0;
+    height: calc(100vh - 60px);
+    background-color: $border-color;
+    >ul{ 
+        list-style: none;
+        padding: 0 20px;
+        >li{
+            display: inline-block;
+            padding: 10px 15px;
+            border: 1px solid $border-color;
+            background-color: #fff;
+            margin : 3px;
+            >a{
+                color: $dark-color;
+            }
+            &:hover, &.active{
+                background-color: $success-color;
+                > a{
+                    color: $white-color;
+                }
+            }
+        }
+    }
+}
+
+//support question
+.current-question{
+    padding: 0 20px;
+    .question-desc {
+        font-size : 16px;
+    }
+    >ul{ 
+        list-style: none;
+        padding: 0px;
+        >li{
+            display: block;
+            padding: 0 0 15px 0;
+            >label{
+                display: inline-block;
+                cursor: pointer;
+                font-size : 16px;
+            }
+        }
+    }
+}
+
+//completed test
+.test-completed{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px);
+    padding-top: 30px;
+    img{
+        max-width: 120px;
+    }
+}
