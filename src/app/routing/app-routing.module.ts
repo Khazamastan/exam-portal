@@ -9,9 +9,9 @@ import { AdminAddComponent }  from '../addQuestions/addQuestions.component';
 import { AdminResultsComponent }  from '../viewResults/viewResults.component';
  
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: 'user/login', pathMatch: 'full' },
+  { path: 'user/login', component: LoginComponent },
+  { path: 'user/register', component: RegisterComponent },
   { path: 'exam', component: ExamComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'admin/add-questions', component: AdminAddComponent},

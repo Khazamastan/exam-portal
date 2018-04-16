@@ -24,9 +24,10 @@ export class ExamComponent implements OnInit {
   setCurrentQuestionIndex($index){
     this.currentQuestion = this.questions[$index];
     this.questionIndex = $index;
-    this.selectedAnswer = "";
+    this.selectedAnswer = this.questions[$index].selectedAnswer;
   }
   setCurrentAnswer(id, answer){
+    this.questions[this.questionIndex].selectedAnswer = answer;
     this.selectedAnswer = answer;
   }
   ngOnInit() {

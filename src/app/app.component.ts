@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {ViewEncapsulation} from '@angular/core';
+import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-root',
@@ -9,4 +11,18 @@ import {ViewEncapsulation} from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  constructor(private router: Router){
+
+  }
+  ngOnInit() {
+    var user = true;
+    var isAdmin = true;
+    if(user){
+      if(isAdmin){
+        // this.router.navigate(['/admin']);
+      }else{
+        // this.router.navigate(['/exam']);
+      }
+    }
+  }  
 }

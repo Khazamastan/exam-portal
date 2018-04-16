@@ -1,28 +1,26 @@
 <div id="app">
-<div class="login-page">
-    <div class="form">
-        <form 
-            class="login-form" 
-            (ngSubmit)="onSubmit($event)"
-        >
-        <input
-            type="text"
-            name="username"
-            placeholder="username"
-            [(ngModel)]="login.username"
-        />
-        <input
-            type="password"
-            name="password"
-            placeholder="password"
-            [(ngModel)]="login.password"
-        />
-        <button class="btn btn-full" type="submit">login</button>
-        <!-- {{this.props.error ? <p class="error-text">{{this.props.error ? "Username or DOB is wrong, Please Correct" : ""}</p> : null} -->
-        </form>
-        <p>
-            Not a registerd user <a routerLink="/register">Register</a>
-        </p>
+    <div class="login-page">
+        <div class="form">
+            <form (ngSubmit)="onSubmit($event)" [formGroup]='login' novalidate>
+                <input type="text" formControlName="username" placeholder="username" />
+                <div class="form-control-feedback" *ngIf="username.invalid && (username.dirty || isSubmitted)">
+                    <p class="error-text" *ngIf="username.errors.required">
+                        username is required.
+                    </p>
+                </div>
+                <input type="password" formControlName="password" placeholder="password" />
+                <div class="form-control-feedback" *ngIf="password.invalid && (password.dirty || isSubmitted)">
+                    <p class="error-text" *ngIf="password.errors.required">
+                        password is required.
+                    </p>
+                </div>
+                <button class="btn btn-full mt-20" type="submit">login</button>
+                <!-- {{this.props.error ? <p class="error-text">{{this.props.error ? "Username or DOB is wrong, Please Correct" : ""}</p> : null} -->
+            </form>
+            <p>
+                Not a registerd user
+                <a routerLink="/user/register">Register</a>
+            </p>
+        </div>
     </div>
-</div>
 </div>

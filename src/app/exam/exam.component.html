@@ -5,65 +5,53 @@
   </section>
   <div *ngIf="!testCompleted" class="test-progress">
     <section class="info-badge">
-      <p>Question : 1</p>
-      <p>Time Remaining: 10:00</p>
+      <p>Question : {{questionIndex+1}}</p>
+      <p>
+        Time Remaining: 
+        <app-counter minutes="30"></app-counter>
+      </p>
     </section>
     <div class="exam-content">
       <section class="current-question">
-        <p class="question-desc">{{currentQuestion.question}}</p>
+        <p class="question-desc" *ngIf="currentQuestion.hasImage">
+          <!-- <img [src]="currentQuestion.question" /> -->
+        </p>
+        <p class="question-desc" *ngIf="!currentQuestion.hasImage">{{currentQuestion.question}}</p>
         <ul>
-            <li *ngFor="let answer of currentQuestion.answers; let i = index">
-              <label 
-                for="{{i}}" 
-                (click)="setCurrentAnswer(currentQuestion.question._id, i)"
-              >
-                  <input 
-                    type="radio" 
-                    id="{{i}}"
-                    class="option-input radio"
-                    name="selectedAnswer"
-                    value="{{i == selectedAnswer}}"
-                  />
-                  {{answer}}
-              </label>
-            </li>
+          <li *ngFor="let answer of currentQuestion.answers; let i = index">
+            <label for="{{i+1}}" (click)="setCurrentAnswer(currentQuestion.question._id, i+1)">
+              <input type="radio" id="{{i+1}}" class="option-input radio" name="selectedAnswer" [value]="i+1"  [ngModel]="currentQuestion.selectedAnswer" />
+              <span *ngIf="answer.hasImage">
+                <!-- <img [src]="answer.answer" /> -->
+              </span>
+              <span *ngIf="!answer.hasImage">
+                {{answer.answer}}
+              </span>
+            </label>
+          </li>
         </ul>
         <div class="question-footer clearfix">
-            <button 
-              class="btn pull-right" 
-              (click)="setCurrentQuestionIndex(questionIndex+1)"
-              [disabled]="!selectedAnswer"
-              [ngClass]="{'disabled': !selectedAnswer}"
-              *ngIf="(questionIndex+1) < this.questions.length"
-            >
-              Next Question
-            </button>
-            <button 
-              class="btn pull-right" 
-              (click)="submitTest()"
-              [disabled]="!selectedAnswer"
-              [ngClass]="{'disabled': !selectedAnswer}"
-              *ngIf="questions.length == (questionIndex+1)"
-            >
-              Submit
-            </button>
+          <button class="btn pull-right" (click)="setCurrentQuestionIndex(questionIndex+1)" [disabled]="!selectedAnswer" [ngClass]="{'disabled': !selectedAnswer}"
+            *ngIf="(questionIndex+1) < this.questions.length">
+            Next Question
+          </button>
+          <button class="btn pull-right" (click)="submitTest()" [disabled]="!selectedAnswer" [ngClass]="{'disabled': !selectedAnswer}"
+            *ngIf="questions.length == (questionIndex+1)">
+            Submit
+          </button>
         </div>
       </section>
       <section class="all-questions">
-          <ul>
-            <li 
-              *ngFor="let question of questions; let i = index" 
-              (click)="setCurrentQuestionIndex(i)"
-              [ngClass]="{'active': currentQuestion._id == question._id}"
-            >
-              <a>{{i+1}}</a>
-            </li>
-          </ul>
+        <ul>
+          <li *ngFor="let question of questions; let i = index" (click)="setCurrentQuestionIndex(i)" [ngClass]="{'active': currentQuestion._id == question._id}">
+            <a>{{i+1}}</a>
+          </li>
+        </ul>
       </section>
-    </div>
+  </div>
   </div>
   <div class="test-completed" *ngIf="testCompleted">
-      <img [src]="testCompletedImage"/>
-      <p>Test Completed</p>
+    <img [src]="testCompletedImage" />
+    <p>Test Completed</p>
   </div>
 </article>

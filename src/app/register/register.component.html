@@ -1,60 +1,50 @@
 <div id="app">
-<div class="register-page">
-    <div class="form">
-        <form 
-            class="login-form" 
-            (ngSubmit)="onSubmit($event)"
-        >
-        <input
-            type="text"
-            name="firstName"
-            placeholder="First Name"
-            [(ngModel)]="newUser.firstName"
-        />
-        <input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            [(ngModel)]="newUser.lastName"
-        />
-        <input
-            type="text"
-            name="email"
-            placeholder="Email"
-            [(ngModel)]="newUser.email"
-        />
-        <input
-            type="phone"
-            name="phone"
-            placeholder="Contact Number"
-            [(ngModel)]="newUser.phone"
-        />
-        <select class="full" [(ngModel)]="newUser.course" name="course">
-            <option value="">
-                Select Course
-            </option>
-            <option class="" *ngFor="let course of courses" value="{{course.id}}">
-                {{course.name}}
-            </option>
-        </select>
-        <select class="full" [(ngModel)]="newUser.branch" name="branch">
-                <option value="">Select Branch</option>
-            <option *ngFor="let branch of branches" value="{{branch.id}}">
-                {{branch.name}}
-            </option>
-        </select>
-        <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            [(ngModel)]="newUser.password"
-        />
-        <button class="btn btn-full" type="submit">Sign Up</button>
-        <!-- {{this.props.error ? <p class="error-text">{{this.props.error ? "Username or DOB is wrong, Please Correct" : ""}</p> : null} -->
-        </form>
-        <p>
-            Already registerd user <a routerLink="/login">Login</a>
-        </p>
+    <div class="register-page">
+        <div class="form">
+            <form (ngSubmit)="onSubmit($event)" [formGroup]='newUser' novalidate>
+                <input type="text" formControlName="name" placeholder="Name" />
+                <div class="form-control-feedback" *ngIf="name.invalid && (name.dirty || isSubmitted)">
+                    <p class="error-text" *ngIf="name.errors.required">
+                        name is required.
+                    </p>
+                </div>
+                <input type="text" formControlName="email" placeholder="Email" />
+                <div class="form-control-feedback" *ngIf="email.invalid && (email.dirty || isSubmitted)">
+                    <p class="error-text" *ngIf="email.errors.required">
+                        email is required.
+                    </p>
+                </div>
+                <input type="phone" formControlName="mobileNumber" placeholder="Contact Number" />
+                <div class="form-control-feedback" *ngIf="mobileNumber.invalid && (mobileNumber.dirty || isSubmitted)">
+                    <p class="error-text" *ngIf="mobileNumber.errors.required">
+                        mobile number is required.
+                    </p>
+                </div>
+                <input type="text" formControlName="collegeCode" placeholder="college Code" />
+                <div class="form-control-feedback" *ngIf="collegeCode.invalid && (collegeCode.dirty || isSubmitted)">
+                    <p class="error-text" *ngIf="collegeCode.errors.required">
+                        college code is required.
+                    </p>
+                </div>
+                <input type="password" formControlName="password" placeholder="Password" />
+                <div class="form-control-feedback" *ngIf="password.invalid && (password.dirty || isSubmitted)">
+                    <p class="error-text" *ngIf="password.errors.required">
+                        password is required.
+                    </p>
+                </div>
+                <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" />
+                <div class="form-control-feedback" *ngIf="confirmPassword.invalid && (confirmPassword.dirty || isSubmitted)">
+                    <p class="error-text" *ngIf="confirmPassword.errors.required">
+                        confirm password is required.
+                    </p>
+                </div>
+                <button class="btn btn-full mt-20" type="submit">Sign Up</button>
+                <!-- {{this.props.error ? <p class="error-text">{{this.props.error ? "Username or DOB is wrong, Please Correct" : ""}</p> : null} -->
+            </form>
+            <p>
+                Already registerd user
+                <a routerLink="/user/login">Login</a>
+            </p>
+        </div>
     </div>
-</div>
 </div>
