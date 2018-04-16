@@ -26,6 +26,19 @@
                         college code is required.
                     </p>
                 </div>
+                <select class="full" [(ngModel)]="newUser.course" name="course">
+                    <option value="">
+                        Select Course
+                    </option>
+                    <option class="" *ngFor="let course of courses" value="{{course.id}}">
+                        {{course.name}}
+                    </option>
+                </select>
+                <div class="form-control-feedback" *ngIf="course.invalid && (course.dirty || isSubmitted)">
+                    <p class="error-text" *ngIf="course.errors.required">
+                        college code is required.
+                    </p>
+                </div>
                 <input type="password" formControlName="password" placeholder="Password" />
                 <div class="form-control-feedback" *ngIf="password.invalid && (password.dirty || isSubmitted)">
                     <p class="error-text" *ngIf="password.errors.required">
