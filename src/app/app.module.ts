@@ -13,6 +13,8 @@ import { AdminAddComponent }  from './addQuestions/addQuestions.component';
 import { AdminResultsComponent }  from './viewResults/viewResults.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppCounter } from "./counter/counter.component";
+import { CounterService } from "./service/counter.service";
+
 
 
 @NgModule({
@@ -33,7 +35,7 @@ import { AppCounter } from "./counter/counter.component";
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CounterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
