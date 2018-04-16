@@ -29,22 +29,22 @@ const routes: Routes = [
   },
   { 
     path: 'exam',
-    canActivate: [ ProtectedGuard ],
+    // canActivate: [ ProtectedGuard ],
     component: ExamComponent 
   },
   { 
     path: 'admin',
-    canActivate: [ ProtectedGuard ],
+    // canActivate: [ ProtectedGuard ],
     component: AdminComponent 
   },
   { 
     path: 'admin/add-questions',
-    canActivate: [ ProtectedGuard ],
+    // canActivate: [ ProtectedGuard ],
     component: AdminAddComponent 
   },
   { 
     path: 'admin/view-results',
-    canActivate: [ ProtectedGuard ],
+    // canActivate: [ ProtectedGuard ],
     component: AdminResultsComponent 
   }
 ];

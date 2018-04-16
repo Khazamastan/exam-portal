@@ -8,18 +8,30 @@
             <button class="btn btn-logout">Log Out</button>
         </section>
         <div class="form">
+            <form (ngSubmit)="onSubmit($event)" [formGroup]='answers' novalidate>
             <h1>Add Questions</h1>
             <p class="col">
                 <label>Test Time :</label>
-                <input type="text" value="" />
+                <input type="text" formControlName="time" placeholder="Time">
             </p>
+            <div class="form-control-feedback" *ngIf="time.invalid && (time.dirty || isSubmitted)">
+                <p class="error-text" *ngIf="time.errors.required">
+                    time is required.
+                </p>
+            </div>
             <p class="col">
                 <label>Choose File :</label>
-                <input type="file" value="" />
+                <input type="file" formControlName="file" placeholder="File">
             </p>
+            <div class="form-control-feedback" *ngIf="file.invalid && (file.dirty || isSubmitted)">
+                    <p class="error-text" *ngIf="file.errors.required">
+                        file is required.
+                    </p>
+                </div>
             <br/>
             <br/>
-            <button class="btn btn-logout bt-sm">Submit</button>
+            <button class="btn btn-logout bt-sm" type="submit">Submit</button>
+            </form>
         </div>
     </div>
 </div>

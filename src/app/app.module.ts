@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ExamComponent } from './exam/exam.component';
@@ -15,8 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppCounter } from "./counter/counter.component";
 import { CounterService } from "./service/counter.service";
 import { AuthenticationModule } from './service';
-
-
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 @NgModule({
   declarations: [
@@ -35,7 +32,8 @@ import { AuthenticationModule } from './service';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AuthenticationModule
+    AuthenticationModule,
+    NgxPaginationModule
   ],
   providers: [CounterService],
   bootstrap: [AppComponent]

@@ -9,43 +9,47 @@
         </section>
         <div class="content">
             <h1>Results</h1>
-            <table>
-                <tr>
-                    <th>Company</th>
-                    <th>Contact</th>
-                    <th>Country</th>
-                </tr>
-                <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td>Centro comercial Moctezuma</td>
-                    <td>Francisco Chang</td>
-                    <td>Mexico</td>
-                </tr>
-                <tr>
-                    <td>Ernst Handel</td>
-                    <td>Roland Mendel</td>
-                    <td>Austria</td>
-                </tr>
-                <tr>
-                    <td>Island Trading</td>
-                    <td>Helen Bennett</td>
-                    <td>UK</td>
-                </tr>
-                <tr>
-                    <td>Laughing Bacchus Winecellars</td>
-                    <td>Yoshi Tannamuri</td>
-                    <td>Canada</td>
-                </tr>
-                <tr>
-                    <td>Magazzini Alimentari Riuniti</td>
-                    <td>Giovanni Rovelli</td>
-                    <td>Italy</td>
-                </tr>
-            </table>
+            <p class="text-right">
+                <pagination-controls  id="some_id"
+                    (pageChange)="currentPage = $event"
+                    directionLinks="true"
+                    previousLabel="Previous"
+                    nextLabel="Next"
+                    screenReaderPaginationLabel="Pagination"
+                    screenReaderPageLabel="page">
+                </pagination-controls>
+            </p>
+            <div class="">
+                <table>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>College</th>
+                        <th>Course</th>
+                        <th>Score</th>
+                    </tr>
+                    <tr *ngFor="let result of results | paginate: { id: 'some_id',itemsPerPage: 30,currentPage: currentPage,totalItems: results.length }">
+                        <td>{{result._id}}</td>
+                        <td>{{result.name}}</td>
+                        <td>{{result.college}}</td>
+                        <td>{{result.course}}</td>
+                        <td>{{result.score}}</td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+            <p class="text-right">
+                <pagination-controls  id="some_id"
+                    (pageChange)="currentPage = $event"
+                    directionLinks="true"
+                    previousLabel="Previous"
+                    nextLabel="Next"
+                    screenReaderPaginationLabel="Pagination"
+                    screenReaderPageLabel="page">
+                </pagination-controls>
+            </p>
         </div>
     </div>
+    <br/>
+    <br/>
 </div>
