@@ -3,6 +3,7 @@ import {Login} from "./login";
 import { HttpClient } from '@angular/common/http';
 import {Router} from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthenticationService } from '../service';
 
 
 @Component({
@@ -14,9 +15,12 @@ export class LoginComponent {
     apiUrl = 'http://localhost:9009/user/login'
     login : FormGroup
     isSubmitted: boolean = false;
-    constructor(private http : HttpClient, private router: Router, private frmBuilder: FormBuilder){
-
-    }
+    constructor(
+        private http : HttpClient, 
+        private router: Router, 
+        private frmBuilder: FormBuilder,
+        private authService: AuthenticationService
+    ) { }
     onSubmit(){
         this.isSubmitted = true;
         if(!this.login.valid)

@@ -7,15 +7,46 @@ import { ExamComponent }  from '../exam/exam.component';
 import { AdminComponent }  from '../admin/admin.component';
 import { AdminAddComponent }  from '../addQuestions/addQuestions.component';
 import { AdminResultsComponent }  from '../viewResults/viewResults.component';
- 
+import { PublicGuard, ProtectedGuard } from 'ngx-auth';
+
+
 const routes: Routes = [
-  { path: '', redirectTo: 'user/login', pathMatch: 'full' },
-  { path: 'user/login', component: LoginComponent },
-  { path: 'user/register', component: RegisterComponent },
-  { path: 'exam', component: ExamComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: 'admin/add-questions', component: AdminAddComponent},
-  { path: 'admin/view-results', component: AdminResultsComponent}
+  { 
+    path: '', 
+    canActivate: [ PublicGuard ],
+    redirectTo: 'user/login', 
+    pathMatch: 'full' 
+  },
+  { 
+    canActivate: [ PublicGuard ],
+    path: 'user/login',
+     component: LoginComponent 
+  },
+  { 
+    path: 'user/register',
+    canActivate: [ PublicGuard ],
+    component: RegisterComponent 
+  },
+  { 
+    path: 'exam',
+    canActivate: [ ProtectedGuard ],
+    component: ExamComponent 
+  },
+  { 
+    path: 'admin',
+    canActivate: [ ProtectedGuard ],
+    component: AdminComponent 
+  },
+  { 
+    path: 'admin/add-questions',
+    canActivate: [ ProtectedGuard ],
+    component: AdminAddComponent 
+  },
+  { 
+    path: 'admin/view-results',
+    canActivate: [ ProtectedGuard ],
+    component: AdminResultsComponent 
+  }
 ];
  
 @NgModule({

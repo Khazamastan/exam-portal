@@ -14,6 +14,7 @@ import { AdminResultsComponent }  from './viewResults/viewResults.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppCounter } from "./counter/counter.component";
 import { CounterService } from "./service/counter.service";
+import { AuthenticationModule } from './service';
 
 
 
@@ -33,7 +34,8 @@ import { CounterService } from "./service/counter.service";
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AuthenticationModule
   ],
   providers: [CounterService],
   bootstrap: [AppComponent]
