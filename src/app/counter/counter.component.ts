@@ -16,7 +16,6 @@ export class AppCounter implements OnInit, OnDestroy {
     @Input() mills = 0;
     private future: Date;
     private futureString: string;
-    private diff: number;
     private $counter: Observable<number>;
     private subscription: Subscription;
     private message: string;
@@ -45,7 +44,7 @@ export class AppCounter implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-        const mills = parseInt(this.mills);
+        var mills = this.mills;
         var minutes = Math.floor(mills / 60000);
         this.counter.initCounter(minutes)
         if(this.counter.$diff){

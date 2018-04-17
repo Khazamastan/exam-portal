@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
-  templateUrl: './addQuestions.component.html',
-  styleUrls: ['./addQuestions.component.scss']
+  templateUrl: './add-questions.component.html',
+  styleUrls: ['./add-questions.component.scss']
 })
 export class AdminAddComponent {
     apiUrl = 'http://localhost:9009/admin/saveQuestion';

@@ -6,7 +6,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
 export class CounterService {
   future: Date;
   futureString: string;
-  diff: Observable<number>;
+  $diff: Observable<number>;
   constructor() {
 
   }

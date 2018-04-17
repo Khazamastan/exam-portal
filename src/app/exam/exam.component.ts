@@ -34,7 +34,7 @@ export class ExamComponent implements OnInit {
     const body = {
       time :  this.counter.$diff
     };
-    const req = this.http.post(apiMapping('saveAnswer'), JSON.stringify(body))
+    const req = this.http.post(apiMapping.saveAnswer, JSON.stringify(body))
         .subscribe(
             res => {
                 debugger;
@@ -50,7 +50,7 @@ export class ExamComponent implements OnInit {
   }
   submitTest(){
     const body = this.getAnswers();
-    const req = this.http.post(apiMapping('saveExampApiUrl'), JSON.stringify(body))
+    const req = this.http.post(apiMapping.saveExampApiUrl, JSON.stringify(body))
         .subscribe(
             res => {
                 debugger;

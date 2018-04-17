@@ -15,7 +15,7 @@ import { ExamComponent } from './exam/exam.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { AdminComponent } from "./admin/admin.component";
-import { AdminAddComponent }  from './addQuestions/addQuestions.component';
+import { AdminAddComponent }  from './add-questions/add-questions.component';
 import { AdminResultsComponent }  from './viewResults/viewResults.component';
 import { LogoutComponent }  from './logout/logout.component';
 

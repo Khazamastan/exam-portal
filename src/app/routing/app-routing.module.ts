@@ -5,7 +5,7 @@ import { LoginComponent }   from '../login/login.component';
 import { RegisterComponent }  from '../register/register.component';
 import { ExamComponent }  from '../exam/exam.component';
 import { AdminComponent }  from '../admin/admin.component';
-import { AdminAddComponent }  from '../addQuestions/addQuestions.component';
+import { AdminAddComponent }  from '../add-questions/add-questions.component';
 import { AdminResultsComponent }  from '../viewResults/viewResults.component';
 import { PublicGuard, ProtectedGuard } from 'ngx-auth';
 
