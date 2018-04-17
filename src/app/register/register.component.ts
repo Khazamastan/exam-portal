@@ -82,7 +82,7 @@ export class RegisterComponent {
     onSubmit(){
 
         this.isSubmitted = true;
-        if(!this.newUser.valid)
+        if(this.newUser.dirty && this.newUser.errors)
          return;
          
         const body = this.newUser.value;

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {mockQuestions} from "../../assets/data/mockQuestions";
 import { HttpClient } from '@angular/common/http';
-import { getapiMapping } from "../../assets/data/apiMapping";
+import { apiMapping } from "../../assets/data/apiMapping";
 import { CounterService } from "../service/counter.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-exam',
@@ -17,7 +18,8 @@ export class ExamComponent implements OnInit {
   testCompleted = false;
   testCompletedImage = '';
   mills = 150500;
-  constructor(private http : HttpClient,private counter: CounterService) { 
+  subscription;
+  constructor(private http : HttpClient,private counter: CounterService, private router: Router) { 
     this.questions = mockQuestions.questions;
     this.currentQuestion = this.questions[0];
     this.testCompletedImage = 'assets/images/completed.jpg';
@@ -75,7 +77,7 @@ export class ExamComponent implements OnInit {
     this.selectedAnswer = answer;
   }
   ngOnInit() {
-    const mills = parseInt(this.mills);
+    const mills = this.mills;
     var minutes = Math.floor(mills / 60000);
     if(!this.counter.$diff){
       this.counter.initCounter(minutes)
