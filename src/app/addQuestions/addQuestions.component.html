@@ -5,7 +5,7 @@
                 <h1 class="heading">Welcome, User</h1>
                 <a routerLink="/admin">Home</a>
             </div>
-            <button class="btn btn-logout">Log Out</button>
+            <app-logout></app-logout>
         </section>
         <div class="form">
             <form (ngSubmit)="onSubmit($event)" [formGroup]='answers' novalidate>
@@ -30,7 +30,7 @@
                 </div>
             <br/>
             <br/>
-            <button class="btn btn-logout bt-sm" type="submit">Submit</button>
+            <button class="btn bt-sm" type="submit">Submit</button>
             </form>
         </div>
     </div>

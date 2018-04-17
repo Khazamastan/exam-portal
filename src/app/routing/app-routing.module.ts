@@ -44,7 +44,7 @@ const routes: Routes = [
   },
   { 
     path: 'admin/view-results',
-    // canActivate: [ ProtectedGuard ],
+    // canActivate: [ ProtectedGuard   ],
     component: AdminResultsComponent 
   }
 ];

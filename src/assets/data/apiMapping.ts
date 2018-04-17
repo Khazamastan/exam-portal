@@ -1,4 +1,4 @@
-var apiMapping = {
+const apiMapping = {
     "saveExampApiUrl" : "exam/save",
     "saveAnswer" : "exam/saveAnswer"
 };
@@ -9,4 +9,4 @@ const getapiMapping = function(apiName){
     return apiMapping[apiName]; 
 };
 
-export getapiMapping;
+export apiMapping;

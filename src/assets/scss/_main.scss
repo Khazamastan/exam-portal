@@ -77,6 +77,9 @@ html,
   box-sizing: border-box;
   font-size: 14px;
 }
+.form select{
+  margin: 15px 0 0 0;
+}
 .form input::placeholder {
     text-transform: capitalize;
 }
