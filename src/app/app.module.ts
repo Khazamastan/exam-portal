@@ -18,6 +18,8 @@ import { AdminComponent } from "./admin/admin.component";
 import { AdminAddComponent }  from './add-questions/add-questions.component';
 import { AdminResultsComponent }  from './viewResults/viewResults.component';
 import { LogoutComponent }  from './logout/logout.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { LogoutComponent }  from './logout/logout.component';
     AdminAddComponent,
     AdminResultsComponent,
     AppCounter,
-    LogoutComponent
+    LogoutComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
