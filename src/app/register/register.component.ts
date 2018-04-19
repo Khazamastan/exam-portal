@@ -1,6 +1,8 @@
 import { Component, Injectable } from '@angular/core';
 import {NewUser} from "./register";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http, RequestOptions, Headers, URLSearchParams} from '@angular/http'
+
 import "rxjs/add/operator/map";
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 
@@ -18,7 +20,7 @@ export class RegisterComponent {
     newUser : FormGroup
     courses = [{
         name : "Computer Science Engineering",
-        id: "cse"
+        id: "CSE"
     },{
         name : "Electronics and Communication Engineering",
         id: "ece"
@@ -42,33 +44,33 @@ export class RegisterComponent {
     constructor(private http : HttpClient, private frmBuilder: FormBuilder){}
     ngOnInit(){
         this.newUser = this.frmBuilder.group({
-            name:['', Validators.required],
-            collegeCode:['', Validators.required],
-            email:['',
+            name:['1', Validators.required],
+            collegeCode:['1', Validators.required],
+            email:['1@gmail.com',
                 [
                     Validators.required,
                     Validators.pattern("[^ @]*@[^ @]*")
                 ]
             ],
-            password: ['',
+            password: ['1',
                 [
                     Validators.minLength(8), 
                     Validators.required
                 ]
             ],
-            confirmPassword: ['',
+            confirmPassword: ['1',
                 [
                     Validators.minLength(8), 
                     Validators.required
                 ]
             ],
-            mobileNumber :['',
+            mobileNumber :['7207810602',
                 [
                     Validators.minLength(10),
                     Validators.required
                 ]
             ],
-            course: ['', Validators.required]
+            course: ['CSE', Validators.required]
 
         });
     }
@@ -85,9 +87,42 @@ export class RegisterComponent {
         if(this.newUser.dirty && this.newUser.errors)
          return;
          
-        const body = this.newUser.value;
+        var body = this.newUser.value;
 
-        const req = this.http.post(this.apiUrl, JSON.stringify(body))
+    //     var options = {
+    //         headers: { 'Content-Type': 'application/json' }
+    //     };
+    //    this.http.post(
+    //        this.apiUrl,
+    //        JSON.stringify(body),
+    //        options
+    //    ).subscribe();
+
+
+    let opt: RequestOptions
+    var headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Content-Type', 'application/json');
+
+    this.http.post(this.apiUrl, JSON.stringify(body), {headers: headers})
+        .subscribe(data => {
+            debugger;
+            console.log(data)
+        }, data => {
+            debugger;
+            console.log(data)
+        })
+
+
+
+       /*  var headers = new HttpHeaders();
+        headers.append("Content-Type", 'application/json');
+        
+        const options = {
+            headers: headers,
+            body : body,
+            method : 'Post'
+          };
+
+        const req = this.http.post(this.apiUrl, JSON.stringify(body), { headers: headers})
         .subscribe(
             res => {
                 debugger;
@@ -97,6 +132,6 @@ export class RegisterComponent {
                 debugger;
             console.log("Error occured");
             }
-        );
+        ); */
     }
 }
