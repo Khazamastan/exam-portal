@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
-
+import { AuthenticationService } from './service';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +11,25 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
   title = 'app';
-  constructor(private router: Router){
-
-  }
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService
+  ){ }
   ngOnInit() {
-    var user = true;
-    var isAdmin = true;
-    if(user){
-      if(isAdmin){
-        // this.router.navigate(['/admin']);
-      }else{
-        // this.router.navigate(['/exam']);
-      }
-    }
+    if(this.authService.isAuthorized()){
+      const user = this.authService.getLoggedInUser();
+      var hasToken = user.value.authToken;
+        if(hasToken){
+          const role = user.value.userRole;
+          if(role == "Admin"){
+            this.router.navigate(['/admin']);
+          }else if(role == "Student"){
+            this.router.navigate(['/exam']);
+          }else{
+            this.router.navigate(['/user/login']);
+          }
+        }
+    });
+
   }  
 }

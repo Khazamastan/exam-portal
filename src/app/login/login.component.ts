@@ -27,11 +27,10 @@ export class LoginComponent {
         if(!this.login.valid)
          return;
         
-        var headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Content-Type', 'application/json');
         const body = this.login.value;
-        const req = this.http.post(this.apiUrl, JSON.stringify(body), {headers})
-        .subscribe(
-            (res:any) => {
+
+        
+        const req = this.authService.login(body).subscribe((res:any) => {
                 debugger;
                 if(res && res.status){
                     console.log(res);
@@ -54,8 +53,8 @@ export class LoginComponent {
             password: ["", Validators.required], 
         });
 
-        this.login.valueChanges.subscribe(val => {
-            this.error = "";
-        });
+        // this.login.valueChanges.subscribe(val => {
+        //     this.error = "";
+        // });
     }
 }

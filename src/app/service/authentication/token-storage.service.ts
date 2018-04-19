@@ -22,6 +22,16 @@ export class TokenStorage {
     return Observable.of(token);
   }
 
+
+  /**
+   * Get refresh token
+   * @returns {Observable<string>}
+   */
+  public getLoggedInUser(): Observable<any> {
+    const user: any = <any>localStorage.getItem('loggedInUser');
+    return Observable.of(JSON.parse(user));
+  }
+
   /**
    * Set access token
    * @returns {TokenStorage}
@@ -43,10 +53,22 @@ export class TokenStorage {
   }
 
    /**
+   * Get refresh token
+   * @returns {Observable<string>}
+   */
+  public setLoggedInUser(user : any): TokenStorage {
+    localStorage.setItem('loggedInUser', user);
+
+    return this;
+  }
+
+
+   /**
    * Remove tokens
    */
   public clear() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    localStorage.removeItem('loggedInUser');
   }
 }

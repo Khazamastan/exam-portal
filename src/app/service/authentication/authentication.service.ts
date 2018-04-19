@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from 'ngx-auth';
-
 import { TokenStorage } from './token-storage.service';
 
 interface AccessData {
   accessToken: string;
   refreshToken: string;
+  user : any;
 }
 
 @Injectable()
@@ -38,6 +38,10 @@ export class AuthenticationService implements AuthService {
    */
   public getAccessToken(): Observable < string > {
     return this.tokenStorage.getAccessToken();
+  }
+
+  public getLoggedInUser() : Observable< any >{
+    return this.tokenStorage.getLoggedInUser();
   }
 
   /**
@@ -85,9 +89,20 @@ export class AuthenticationService implements AuthService {
    * EXTRA AUTH METHODS
    */
 
-  public login(): Observable<any> {
-    return this.http.post(`http://localhost:9009/user/login`, { })
-    .do((tokens: AccessData) => this.saveAccessData(tokens));
+  public login(data): Observable<any> {
+    var headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Content-Type', 'application/json');
+    return this.http.post(`http://localhost:9009/user/login`, data, {headers : headers})
+    .do((res: any) => {
+      debugger;
+      if(res.status){
+        const tokens = {
+          accessToken: res.result.authToken,
+          refreshToken: res.result.authToken,
+          user : res.result
+        }
+        this.saveAccessData(tokens)
+      }
+    });
   }
 
   /**
@@ -104,10 +119,11 @@ export class AuthenticationService implements AuthService {
    * @private
    * @param {AccessData} data
    */
-  private saveAccessData({ accessToken, refreshToken }: AccessData) {
+  private saveAccessData({ accessToken, refreshToken, user }: AccessData) {
     this.tokenStorage
       .setAccessToken(accessToken)
-      .setRefreshToken(refreshToken);
+      .setRefreshToken(refreshToken)
+      .setLoggedInUser(JSON.stringify(user));
   }
 
 }

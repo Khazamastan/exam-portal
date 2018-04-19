@@ -24,12 +24,12 @@ const routes: Routes = [
   },
   { 
     path: 'exam',
-    // canActivate: [ ProtectedGuard ],
+    canActivate: [ ProtectedGuard ],
     component: ExamComponent 
   },
   { 
     path: 'admin',
-    // canActivate: [ ProtectedGuard ],
+    canActivate: [ ProtectedGuard ],
     component: AdminComponent 
   },
   { 
@@ -39,7 +39,7 @@ const routes: Routes = [
   },
   { 
     path: 'admin/view-results',
-    // canActivate: [ ProtectedGuard   ],
+    canActivate: [ ProtectedGuard   ],
     component: AdminResultsComponent 
   },
   { 
