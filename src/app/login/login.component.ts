@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Login} from "./login";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../service';
@@ -15,6 +15,7 @@ export class LoginComponent {
     apiUrl = 'http://localhost:9009/user/login'
     login : FormGroup
     isSubmitted: boolean = false;
+    error;
     constructor(
         private http : HttpClient, 
         private router: Router, 
@@ -26,18 +27,22 @@ export class LoginComponent {
         if(!this.login.valid)
          return;
         
+        var headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Content-Type', 'application/json');
         const body = this.login.value;
-        const req = this.http.post(this.apiUrl, JSON.stringify(body))
+        const req = this.http.post(this.apiUrl, JSON.stringify(body), {headers})
         .subscribe(
-            res => {
+            (res:any) => {
                 debugger;
-                console.log(res);
-                this.router.navigate(['/exam']);
+                if(res && res.status){
+                    console.log(res);
+                    this.router.navigate(['/exam']);
+                }else{
+                    this.error = "Unable to Login"
+                }
             },
             err => {
                 debugger;
                 console.log("Error occured");
-                this.router.navigate(['/user/register']);
             }
         );
     }
@@ -47,6 +52,10 @@ export class LoginComponent {
         this.login = this.frmBuilder.group({
             username: ["", Validators.required], 
             password: ["", Validators.required], 
+        });
+
+        this.login.valueChanges.subscribe(val => {
+            this.error = "";
         });
     }
 }

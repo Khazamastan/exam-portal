@@ -1,7 +1,7 @@
 <div id="app">
     <div class="register-page">
         <div class="form">
-            <form (ngSubmit)="onSubmit($event)" [formGroup]='newUser' novalidate>
+            <form *ngIf="!registered" (ngSubmit)="onSubmit($event)" [formGroup]='newUser' novalidate>
                 <input type="text" formControlName="name" placeholder="Name" />
                 <div class="form-control-feedback" *ngIf="name.invalid && (name.dirty || isSubmitted)">
                     <p class="error-text" *ngIf="name.errors.required">
@@ -53,10 +53,14 @@
                 </div>
                 <button class="btn btn-full mt-20" type="submit">Sign Up</button>
                 <!-- {{this.props.error ? <p class="error-text">{{this.props.error ? "Username or DOB is wrong, Please Correct" : ""}</p> : null} -->
+                <p class="error-text">{{error}}</p>
             </form>
-            <p>
+            <div *ngIf="registered">
+                Registration Complete click here to <a routerLink="/user/login">Login</a>
+            </div>
+            <p *ngIf="!registered">
                 Already registerd user
-                <a routerLink="/user/login">Login</a>
+            <a routerLink="/user/login">Login</a>
             </p>
         </div>
     </div>

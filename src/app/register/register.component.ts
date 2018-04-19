@@ -1,7 +1,7 @@
 import { Component, Injectable } from '@angular/core';
 import {NewUser} from "./register";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Http, RequestOptions, Headers, URLSearchParams} from '@angular/http'
+import {Router} from "@angular/router";
 
 import "rxjs/add/operator/map";
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
@@ -18,6 +18,7 @@ import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 export class RegisterComponent {
     apiUrl = 'http://localhost:9009/user/register'
     newUser : FormGroup
+    registered: boolean = false;
     courses = [{
         name : "Computer Science Engineering",
         id: "CSE"
@@ -41,7 +42,12 @@ export class RegisterComponent {
         id: "che"
     }];
     isSubmitted: boolean = false;
-    constructor(private http : HttpClient, private frmBuilder: FormBuilder){}
+    error;
+    constructor(
+        private http : HttpClient,
+        private frmBuilder: FormBuilder,
+        private router: Router, 
+    ){}
     ngOnInit(){
         this.newUser = this.frmBuilder.group({
             name:['1', Validators.required],
@@ -73,6 +79,10 @@ export class RegisterComponent {
             course: ['CSE', Validators.required]
 
         });
+
+        this.newUser.valueChanges.subscribe(val => {
+            this.error = "";
+        });
     }
     get name() { return this.newUser.get('name'); }
     get collegeCode() { return this.newUser.get('collegeCode'); }
@@ -89,49 +99,25 @@ export class RegisterComponent {
          
         var body = this.newUser.value;
 
-    //     var options = {
-    //         headers: { 'Content-Type': 'application/json' }
-    //     };
-    //    this.http.post(
-    //        this.apiUrl,
-    //        JSON.stringify(body),
-    //        options
-    //    ).subscribe();
 
-
-    let opt: RequestOptions
     var headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Content-Type', 'application/json');
 
-    this.http.post(this.apiUrl, JSON.stringify(body), {headers: headers})
-        .subscribe(data => {
+    this.http.post(this.apiUrl, JSON.stringify(body), {headers})
+        .subscribe((data:any) => {
             debugger;
-            console.log(data)
-        }, data => {
-            debugger;
-            console.log(data)
-        })
-
-
-
-       /*  var headers = new HttpHeaders();
-        headers.append("Content-Type", 'application/json');
-        
-        const options = {
-            headers: headers,
-            body : body,
-            method : 'Post'
-          };
-
-        const req = this.http.post(this.apiUrl, JSON.stringify(body), { headers: headers})
-        .subscribe(
-            res => {
-                debugger;
-            console.log(res);
-            },
-            err => {
-                debugger;
-            console.log("Error occured");
+            if(data && data.status){
+                console.log(data);
+                this.registered = true;
+                setTimeout(() => {
+                    this.router.navigate(['/user/login']);
+                }, 5000)
+            }else{
+                this.error = data.errorObject.errorMessage
             }
-        ); */
+            console.log(data)
+        }, (res:any) => {
+            debugger;
+            console.log(res);
+        })
     }
 }
