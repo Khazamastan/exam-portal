@@ -15,21 +15,23 @@ export class AppComponent {
     private router: Router,
     private authService: AuthenticationService
   ){ }
-  ngOnInit() {
+  ngOnInit() { 
     if(this.authService.isAuthorized()){
       const user = this.authService.getLoggedInUser();
-      var hasToken = user.value.authToken;
-        if(hasToken){
-          const role = user.value.userRole;
-          if(role == "Admin"){
-            this.router.navigate(['/admin']);
-          }else if(role == "Student"){
-            this.router.navigate(['/exam']);
-          }else{
-            this.router.navigate(['/user/login']);
+      const role = user.subscribe((data) =>{
+          if(data.authToken){
+            var role = "Student";
+            if(data.userRole == "Admin"){
+              this.router.navigate(['/admin']);
+            }else if(data.userRole == "Student"){
+              this.router.navigate(['/exam']);
+            }else{
+              this.router.navigate(['/user/login']);
+            }
+
           }
-        }
-    });
+        })
+    }
 
   }  
 }

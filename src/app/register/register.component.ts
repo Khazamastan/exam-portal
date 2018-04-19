@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 
 import "rxjs/add/operator/map";
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
-
+import { AuthenticationService } from '../service';
 
 @Component({
   selector: 'app-register',
@@ -16,9 +16,10 @@ import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 
 @Injectable()
 export class RegisterComponent {
-    apiUrl = 'http://localhost:9009/user/register'
+    apiUrl = 'http://localhost:9009/user/register';
     newUser : FormGroup
     registered: boolean = false;
+    loggedInUser;
     courses = [{
         name : "Computer Science Engineering",
         id: "CSE"
@@ -47,6 +48,7 @@ export class RegisterComponent {
         private http : HttpClient,
         private frmBuilder: FormBuilder,
         private router: Router, 
+        private authService: AuthenticationService
     ){}
     ngOnInit(){
         this.newUser = this.frmBuilder.group({
@@ -91,6 +93,7 @@ export class RegisterComponent {
     get mobileNumber() { return this.newUser.get('mobileNumber'); }
     get course() { return this.newUser.get('course'); }
     get confirmPassword() { return this.newUser.get('confirmPassword'); }
+    
     onSubmit(){
 
         this.isSubmitted = true;
