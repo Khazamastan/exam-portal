@@ -7,10 +7,19 @@ import { AuthenticationService } from './service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  styles: [`
+  :host ::ng-deep .custom-spinner-template {
+    height: 50% !important;
+    width: 50% !important;
+    top: 26% !important;
+    left: 24% !important;
+  }
+  `]
 })
 export class AppComponent {
   title = 'app';
+  template: string =`<div class="span"><div class="typing_loader"></div></div>`
   constructor(
     private router: Router,
     private authService: AuthenticationService
@@ -22,7 +31,9 @@ export class AppComponent {
           if(data.authToken){
             var role = "Student";
             if(data.userRole == "Admin"){
-              this.router.navigate(['/admin']);
+              if(window.location.href.indexOf('/admin') == -1){
+                this.router.navigate(['/admin']);
+              }
             }else if(data.userRole == "Student"){
               this.router.navigate(['/exam']);
             }else{
@@ -33,5 +44,5 @@ export class AppComponent {
         })
     }
 
-  }  
+  }
 }

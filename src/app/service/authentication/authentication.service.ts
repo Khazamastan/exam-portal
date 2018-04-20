@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from 'ngx-auth';
 import { TokenStorage } from './token-storage.service';
+import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 
 interface AccessData {
   accessToken: string;
@@ -15,7 +16,8 @@ export class AuthenticationService implements AuthService {
 
   constructor(
     private http: HttpClient,
-    private tokenStorage: TokenStorage
+    private tokenStorage: TokenStorage,
+    private spinner: Ng4LoadingSpinnerService,
   ) {}
 
   /**
@@ -50,6 +52,15 @@ export class AuthenticationService implements AuthService {
    * can execute pending requests or retry original one
    * @returns {Observable<any>}
    */
+  public getHeaders() : any{
+    var authToken = localStorage.getItem('accessToken');      
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'}).
+      set('Content-Type', 'application/json').
+      set('authToken', authToken);
+
+      return headers;
+  }
   public refreshToken(): Observable < AccessData > {
     return this.tokenStorage
       .getRefreshToken()
@@ -90,10 +101,10 @@ export class AuthenticationService implements AuthService {
    */
 
   public login(data): Observable<any> {
+    this.spinner.show();
     var headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Content-Type', 'application/json');
     return this.http.post(`http://localhost:9009/user/login`, data, {headers : headers})
     .do((res: any) => {
-      debugger;
       if(res.status){
         const tokens = {
           accessToken: res.result.authToken,
@@ -102,6 +113,9 @@ export class AuthenticationService implements AuthService {
         }
         this.saveAccessData(tokens)
       }
+      this.spinner.hide();
+    },(res) => {
+      this.spinner.hide();
     });
   }
 

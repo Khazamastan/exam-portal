@@ -2,6 +2,7 @@ import { Component, Injectable } from '@angular/core';
 import {NewUser} from "./register";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from "@angular/router";
+import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 
 import "rxjs/add/operator/map";
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
@@ -48,7 +49,8 @@ export class RegisterComponent {
         private http : HttpClient,
         private frmBuilder: FormBuilder,
         private router: Router, 
-        private authService: AuthenticationService
+        private authService: AuthenticationService,
+        private spinner: Ng4LoadingSpinnerService,
     ){}
     ngOnInit(){
         this.newUser = this.frmBuilder.group({
@@ -104,7 +106,7 @@ export class RegisterComponent {
 
 
     var headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Content-Type', 'application/json');
-
+    this.spinner.show();
     this.http.post(this.apiUrl, JSON.stringify(body), {headers})
         .subscribe((data:any) => {
             debugger;
@@ -118,8 +120,9 @@ export class RegisterComponent {
                 this.error = data.errorObject.errorMessage
             }
             console.log(data)
+            this.spinner.hide();
         }, (res:any) => {
-            debugger;
+            this.spinner.hide();
             console.log(res);
         })
     }

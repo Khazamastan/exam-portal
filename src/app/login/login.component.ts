@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../service';
-
+import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,8 @@ export class LoginComponent {
         private http : HttpClient, 
         private router: Router, 
         private frmBuilder: FormBuilder,
-        private authService: AuthenticationService
+        private authService: AuthenticationService,
+        private spinner: Ng4LoadingSpinnerService,
     ) { }
     onSubmit(){
         this.isSubmitted = true;
@@ -29,7 +30,7 @@ export class LoginComponent {
         
         const body = this.login.value;
 
-        
+        this.spinner.show();
         const req = this.authService.login(body).subscribe((res:any) => {
                 debugger;
                 if(res && res.status){
@@ -38,9 +39,10 @@ export class LoginComponent {
                 }else{
                     this.error = "Unable to Login"
                 }
+                this.spinner.hide();
             },
             err => {
-                debugger;
+                this.spinner.hide();
                 console.log("Error occured");
             }
         );

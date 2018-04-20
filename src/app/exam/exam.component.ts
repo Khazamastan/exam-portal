@@ -5,6 +5,7 @@ import { apiMapping } from "../../assets/data/apiMapping";
 import { CounterService } from "../service/counter.service";
 import {Router} from "@angular/router";
 import { AuthenticationService } from '../service';
+import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-exam',
@@ -12,65 +13,77 @@ import { AuthenticationService } from '../service';
   styleUrls: ['./exam.component.scss']
 })
 export class ExamComponent implements OnInit {
+  scrollConfig = {
+    suppressScrollX: true
+  };
   getTestUrl = 'http://localhost:9009/exam/get-questions';
+  submitQuestionUrl = 'http://localhost:9009/exam/submit-question';
+  submitTestUrl = 'http://localhost:9009/exam/submit-test';
   questions = [];
   selectedAnswer = "";
-  currentQuestion = {};
+  currentQuestion;
+  remainingTime:number;
   questionIndex = 0;
   testCompleted = false;
   testCompletedImage = '';
-  mills = 150500;
+  mills = 1505000;
   loggedInUser;
   subscription;
   error;
+  started;
+  headers;
   constructor(
     private http : HttpClient,
     private counter: CounterService,
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private spinner: Ng4LoadingSpinnerService,
   ) { 
-    this.questions = mockQuestions.questions;
-    this.currentQuestion = this.questions[0];
     this.testCompletedImage = 'assets/images/completed.jpg';
   }
   getAnswers(){
-    var answers = {}
+    var answers = []
     this.questions.forEach((question) => {
-      answers[question._id] = question.selectedAnswer;
+      answers.push({questionId : question.questionId, answerId : question.selectedAnswer});;
      });
 
      return answers;
   }
   saveAnswer(){
+    const questionId = this.currentQuestion.questionId;
+    const answerId = this.questions[this.questionIndex].selectedAnswer;
     const body = {
-      time :  this.counter.$diff
+      questionId : questionId,
+      answerId : answerId,
+      time : this.remainingTime
     };
-    const req = this.http.post(apiMapping.saveAnswer, JSON.stringify(body))
+    const headers = this.authService.getHeaders();
+    
+    const req = this.http.post(this.submitQuestionUrl, JSON.stringify(body), {headers})
         .subscribe(
             res => {
-                debugger;
-                console.log(res);
-                this.testCompleted = true;
-                this.router.navigate(['/login']);
+              
             },
             err => {
-                debugger;
+              
                 console.log("Error occured");
             }
         );
   }
   submitTest(){
     const body = this.getAnswers();
-    const req = this.http.post(apiMapping.saveExampApiUrl, JSON.stringify(body))
-        .subscribe(
-            res => {
-                debugger;
+    const headers = this.authService.getHeaders();
+    this.spinner.show();
+    const req = this.http.post(this.submitTestUrl, JSON.stringify(body), {headers})
+        .subscribe((res:any) => {
                 console.log(res);
-                this.testCompleted = true;
-                this.router.navigate(['/login']);
+                if(res && res.status){
+                    this.testCompleted = true;
+                }
+                this.spinner.hide();
             },
             err => {
-                debugger;
+              this.spinner.hide();
                 console.log("Error occured");
             }
         );
@@ -80,33 +93,55 @@ export class ExamComponent implements OnInit {
     this.currentQuestion = this.questions[$index];
     this.questionIndex = $index;
     this.selectedAnswer = this.questions[$index].selectedAnswer;
+    this.saveAnswer();
   }
   setCurrentAnswer(id, answer){
     this.questions[this.questionIndex].selectedAnswer = answer;
     this.selectedAnswer = answer;
+    this.saveAnswer();
+  }
+  startTest(questionsList){
+    var questions = [];
+    Object.keys(questionsList).forEach((subject) => {
+      var subjectQuestions = (questionsList[subject]);
+      if(Array && Array.isArray(subjectQuestions)){
+        subjectQuestions = subjectQuestions.splice(0,25);
+        if(subjectQuestions && subjectQuestions.length)
+          questions = questions.concat(subjectQuestions);
+      }
+    });
+    this.started=true;
+    this.currentQuestion = questions[0];
+    this.questions = questions.filter((question) => {
+        if(question.questionId){
+          return question;
+        }
+    })
   }
   getTest(){
-    var authToken = this.loggedInUser.authToken;
-    var userInfoID = this.loggedInUser.userInfoID;
-    var headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Content-Type', 'application/json');
-    const body = {
-        userInfoID, 
-        authToken
-    };
-    this.http.post(this.getTestUrl, JSON.stringify(body), {headers})
+    const headers = this.authService.getHeaders();
+    this.spinner.show()
+    this.http.post(this.getTestUrl, JSON.stringify({}), {headers})
             .subscribe((res:any) => {
-                debugger;
                 if(res && res.status){
+                  if(res.result){
+                    if(res.result.status == "COMPLETED"){
+                      this.testCompleted = true;
+                    }else{
+                      this.startTest(res.result);
+                  }
                 }else{
                     this.error = res.errorObject.errorMessage
                 }
+                this.spinner.hide();
+              }
                 console.log(res)
             }, (res:any) => {
-                debugger;
+                this.spinner.hide();
                 console.log(res);
             })
 }
-  ngOnInit() {
+ngOnInit() {
     const mills = this.mills;
     var minutes = Math.floor(mills / 60000);
     if(!this.counter.$diff){
@@ -114,6 +149,7 @@ export class ExamComponent implements OnInit {
     }
     if(this.counter.$diff){
       this.subscription = this.counter.$diff.subscribe((diff) => {
+        this.remainingTime = diff;
         if(diff === 0){
           this.subscription.unsubscribe();
           this.submitTest();

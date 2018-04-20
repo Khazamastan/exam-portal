@@ -24,16 +24,18 @@
                     <tr>
                         <th>Student ID</th>
                         <th>Student Name</th>
+                        <th>Email</th>
                         <th>College</th>
                         <th>Course</th>
                         <th>Score</th>
                     </tr>
                     <tr *ngFor="let result of results | paginate: { id: 'some_id',itemsPerPage: 30,currentPage: currentPage,totalItems: results.length }">
-                        <td>{{result._id}}</td>
-                        <td>{{result.name}}</td>
-                        <td>{{result.college}}</td>
+                        <td>{{result.userInfoId}}</td>
+                        <td>{{result.userName}}</td>
+                        <td>{{result.email}}</td>
+                        <td>{{result.collegeCode}}</td>
                         <td>{{result.course}}</td>
-                        <td>{{result.score}}</td>
+                        <td>{{result.marks}}</td>
                     </tr>
                 </table>
             </div>

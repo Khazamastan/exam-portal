@@ -1,42 +1,7 @@
 import { Component } from '@angular/core';
-
- var results =
-[
-  {
-    name: "Earl of Lemongrab",
-    "_id" : 1, 
-    college: "cmrit",
-    course : "cse",
-    score : 80
-  },
-  {
-    name: "Phoebe",
-    "_id" : 2, 
-    college: "cmrit",
-    course : "cse",
-    score : 80
-  },
-  {
-    name: "Bonnibel Bubblegum",
-    "_id" : 3, 
-    college: "cmrit",
-    course : "cse",
-    score : 80
-  },
-  {
-    name: "Lumpy Space Princess",
-    "_id" : 4, 
-    college: "cmrit",
-    course : "cse",
-    score : 80
-  },
-];
-
-results = results.concat(results);
-results = results.concat(results);
-results = results.concat(results);
-results = results.concat(results);
-results = results.concat(results);
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthenticationService } from '../service';
+import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-admin',
@@ -44,14 +9,48 @@ results = results.concat(results);
   styleUrls: ['./viewResults.component.scss']
 })
 export class AdminResultsComponent {
-    results = results;
+    getResultUrl = 'http://localhost:9009/exam/get-results';
     onSubmit(e){
         //TODO : Do login here.
     }
-    constructor(){
-
-    }
+    results = [];
+    loggedInUser;
+    constructor(
+      private http : HttpClient,
+      private authService: AuthenticationService,
+      private spinner: Ng4LoadingSpinnerService,
+    ){ }
     ngOnInit(){
-
+      const user = this.authService.getLoggedInUser();
+      const role = user.subscribe((data) =>{
+        this.loggedInUser = data;
+        this.getResults()
+      })
+    }
+    getResults(){
+      var authToken = this.loggedInUser.authToken;
+      var userInfoID = this.loggedInUser.userInfoID;
+      var headers = new HttpHeaders({
+        'Content-Type': 'application/json'}).
+        set('Content-Type', 'application/json').
+        set('authToken', authToken);
+      const body = {
+          authToken
+      };
+      this.spinner.show();
+      this.http.get(this.getResultUrl, {headers})
+        .subscribe((res:any) => {
+            if(res && res.status){
+              if(res.result){
+                this.results = res.result;
+              }
+            }else{
+            }
+            this.spinner.hide();
+            console.log(res)
+        }, (res:any) => {
+            this.spinner.hide();
+            console.log(res);
+        })
     }
 }

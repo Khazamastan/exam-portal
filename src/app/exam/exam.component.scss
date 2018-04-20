@@ -112,9 +112,6 @@
     flex : 1;
 }
 
-.btn-logout{
-    width : 120px;
-}
 
 //all questions
 .all-questions{
@@ -122,17 +119,26 @@
     flex : 0;
     height: calc(100vh - 60px);
     background-color: $border-color;
-    >ul{ 
+    ul{ 
         list-style: none;
         padding: 0 20px;
         >li{
             display: inline-block;
-            padding: 10px 15px;
+            padding: 10px 10px;
+            width: 16.666%;
+            border-radius: 3px;
             border: 1px solid $border-color;
             background-color: #fff;
             margin : 3px;
+            text-align: center;
             >a{
                 color: $dark-color;
+            }
+            &.answered{
+                background-color: green;
+                a{
+                    color: #fff;
+                }
             }
             &:hover, &.active{
                 background-color: $success-color;

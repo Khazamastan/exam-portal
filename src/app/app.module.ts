@@ -20,6 +20,17 @@ import { AdminResultsComponent }  from './viewResults/viewResults.component';
 import { LogoutComponent }  from './logout/logout.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
+
+import { Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
+
 
 @NgModule({
   declarations: [
@@ -41,9 +52,17 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HttpClientModule,
     ReactiveFormsModule,
     AuthenticationModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    PerfectScrollbarModule,
+    Ng4LoadingSpinnerModule
   ],
-  providers: [CounterService],
+  providers: [
+    CounterService,
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
