@@ -35,7 +35,13 @@ export class LoginComponent {
                 debugger;
                 if(res && res.status){
                     console.log(res);
-                    this.router.navigate(['/exam']);
+                    if(res.result.userRole == "Admin"){
+                          this.router.navigate(['/admin']);
+                      }else if(res.result.userRole == "Student"){
+                        this.router.navigate(['/exam']);
+                      }else{
+                        this.router.navigate(['/user/login']);
+                      }
                 }else{
                     this.error = "Unable to Login"
                 }

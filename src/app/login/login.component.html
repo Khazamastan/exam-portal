@@ -1,6 +1,7 @@
 <div id="app">
     <div class="login-page">
         <div class="form">
+            <h1>Login</h1>
             <form (ngSubmit)="onSubmit($event)" [formGroup]='login' novalidate>
                 <input type="text" formControlName="username" placeholder="username" />
                 <div class="form-control-feedback" *ngIf="username.invalid && (username.dirty || isSubmitted)">
@@ -18,8 +19,7 @@
                 <p class="error-text">{{error}}</p>
             </form>
             <p>
-                Not a registerd user
-                <a routerLink="/user/register">Register</a>
+                Not a registerd user <a routerLink="/user/register">register</a>
             </p>
         </div>
     </div>

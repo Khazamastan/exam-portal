@@ -30,10 +30,7 @@ export class AdminResultsComponent {
     getResults(){
       var authToken = this.loggedInUser.authToken;
       var userInfoID = this.loggedInUser.userInfoID;
-      var headers = new HttpHeaders({
-        'Content-Type': 'application/json'}).
-        set('Content-Type', 'application/json').
-        set('authToken', authToken);
+      var headers = this.authService.getHeaders();
       const body = {
           authToken
       };

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { AuthService } from 'ngx-auth';
 import { TokenStorage } from './token-storage.service';
 import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
+import {Router} from "@angular/router";
+
 
 interface AccessData {
   accessToken: string;
@@ -17,6 +19,7 @@ export class AuthenticationService implements AuthService {
   constructor(
     private http: HttpClient,
     private tokenStorage: TokenStorage,
+    private router : Router,
     private spinner: Ng4LoadingSpinnerService,
   ) {}
 
@@ -54,10 +57,16 @@ export class AuthenticationService implements AuthService {
    */
   public getHeaders() : any{
     var authToken = localStorage.getItem('accessToken');      
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'}).
-      set('Content-Type', 'application/json').
-      set('authToken', authToken);
+    if(authToken){
+      var headers = new HttpHeaders({
+        'Content-Type': 'application/json'})
+        .set('authToken', authToken)
+        .set('Content-Type', 'application/json');
+      }else{
+        var headers = new HttpHeaders({
+          'Content-Type': 'application/json'})
+          .set('Content-Type', 'application/json');
+      }
 
       return headers;
   }
@@ -102,7 +111,7 @@ export class AuthenticationService implements AuthService {
 
   public login(data): Observable<any> {
     this.spinner.show();
-    var headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Content-Type', 'application/json');
+    var headers = this.getHeaders()
     return this.http.post(`http://localhost:9009/user/login`, data, {headers : headers})
     .do((res: any) => {
       if(res.status){
@@ -124,7 +133,9 @@ export class AuthenticationService implements AuthService {
    */
   public logout(): void {
     this.tokenStorage.clear();
-    location.reload(true);
+    var headers = this.getHeaders();
+    const res =  this.http.post(`http://localhost:9009/user/logout`, {}, {headers : headers});
+    this.router.navigate(['/user/login']);
   }
 
   /**

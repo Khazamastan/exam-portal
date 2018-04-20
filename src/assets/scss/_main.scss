@@ -48,9 +48,9 @@ html,
   position: relative;
   z-index: 1;
   background: #FFFFFF;
-  max-width: 480px;
+  max-width: 412px; 
   margin: 0 auto 100px;
-  padding: 45px;
+  padding: 30px 40px;
   text-align: center;
   border-radius: 3px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.24);
@@ -58,6 +58,9 @@ html,
   &.search{
     min-height : 320px;
     max-width : 780px;
+  }
+  h1{
+    margin: 0 0 10px 0 ;
   }
 }
 .error-text{
@@ -74,7 +77,7 @@ html,
   color : #736f6f;
   border: 0;
   margin: 15px 0 0 0;
-  padding: 15px;
+  padding: 10px 10px;
   box-sizing: border-box;
   font-size: 14px;
 }

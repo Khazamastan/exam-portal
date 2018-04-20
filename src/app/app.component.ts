@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
 import { AuthenticationService } from './service';
+import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-root',
@@ -22,13 +23,15 @@ export class AppComponent {
   template: string =`<div class="span"><div class="typing_loader"></div></div>`
   constructor(
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private spinner: Ng4LoadingSpinnerService,
   ){ }
-  ngOnInit() { 
+  ngOnInit() {
     if(this.authService.isAuthorized()){
+      this.spinner.show();
       const user = this.authService.getLoggedInUser();
       const role = user.subscribe((data) =>{
-          if(data.authToken){
+          if(data && data.authToken){
             var role = "Student";
             if(data.userRole == "Admin"){
               if(window.location.href.indexOf('/admin') == -1){
@@ -36,13 +39,18 @@ export class AppComponent {
               }
             }else if(data.userRole == "Student"){
               this.router.navigate(['/exam']);
-            }else{
-              this.router.navigate(['/user/login']);
             }
-
           }
         })
+      }else{
+        if(window.location.href.indexOf('/register') == -1){
+          this.router.navigate(['/user/login']);
+        }
+
     }
 
+  }
+  ngAfterViewInit() {
+    this.spinner.hide();
   }
 }

@@ -131,6 +131,7 @@ export class ExamComponent implements OnInit {
                       this.startTest(res.result);
                   }
                 }else{
+                  if(res.errorObject)
                     this.error = res.errorObject.errorMessage
                 }
                 this.spinner.hide();

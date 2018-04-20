@@ -105,7 +105,7 @@ export class RegisterComponent {
         var body = this.newUser.value;
 
 
-    var headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Content-Type', 'application/json');
+    var headers = this.authService.getHeaders();
     this.spinner.show();
     this.http.post(this.apiUrl, JSON.stringify(body), {headers})
         .subscribe((data:any) => {
