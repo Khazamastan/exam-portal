@@ -132,10 +132,13 @@ export class AuthenticationService implements AuthService {
    * Logout
    */
   public logout(): void {
-    this.tokenStorage.clear();
+    debugger;
     var headers = this.getHeaders();
-    const res =  this.http.post(`http://localhost:9009/user/logout`, {}, {headers : headers});
-    this.router.navigate(['/user/login']);
+    const res =  this.http.post(`http://localhost:9009/user/logout`, JSON.stringify({}), {headers : headers}).subscribe((res) => {
+      this.tokenStorage.clear();
+      this.router.navigate(['/user/login']);
+
+    })
   }
 
   /**

@@ -19,8 +19,16 @@
         <p class="question-desc" *ngIf="!currentQuestion.hasImage">{{currentQuestion.qustionText}}</p>
         <ul>
           <li *ngFor="let answer of currentQuestion.answerList; let i = index">
-            <label for="{{i+1}}" (click)="setCurrentAnswer(currentQuestion.questionId, answer.answerId)">
-              <input type="radio" id="{{i+1}}" class="option-input radio" name="selectedAnswer" [value]="answer.answerId"  [ngModel]="currentQuestion.selectedAnswer" />
+            <label for="{{i+1}}">
+              <input 
+                type="radio" 
+                id="{{i+1}}" 
+                class="option-input radio" 
+                name="selectedAnswer" 
+                [value]="answer.answerId" 
+                [checked]="answer.answerId == currentQuestion.answerId" 
+                (change)="setCurrentAnswer(currentQuestion.questionId, answer.answerId)"
+                />
               <span *ngIf="answer.hasImage">
                 <!-- <img [src]="answer.answer" /> -->
               </span>
@@ -44,7 +52,7 @@
       <section class="all-questions">
         <perfect-scrollbar style="max-height: calc(100vh - 100px);" [config]="scrollConfig">
             <ul>
-                <li *ngFor="let question of questions; let i = index" (click)="setCurrentQuestionIndex(i)" [ngClass]="{'active': currentQuestion.questionId == question.questionId, 'answered' : question.selectedAnswer}">
+                <li *ngFor="let question of questions; let i = index" id="{{question.questionId}}" (click)="setCurrentQuestionIndex(i)" [ngClass]="{'active': (currentQuestion.questionId == question.questionId), 'answered' : question.answerId}">
                   <a>{{i+1}}</a>
                 </li>
               </ul>
