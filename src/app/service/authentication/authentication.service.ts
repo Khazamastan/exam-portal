@@ -59,12 +59,26 @@ export class AuthenticationService implements AuthService {
     var authToken = localStorage.getItem('accessToken');      
     if(authToken){
       var headers = new HttpHeaders({
-        'Content-Type': 'application/json'})
-        .set('authToken', authToken)
-        .set('Content-Type', 'application/json');
+        'Content-Type': undefined})
+        .set('authToken', authToken);
       }else{
         var headers = new HttpHeaders({
           'Content-Type': 'application/json'})
+          .set('Content-Type', 'application/json');
+      }
+
+      return headers;
+  }
+  public getHeadersMulti() : any{
+    var authToken = localStorage.getItem('accessToken');      
+    if(authToken){
+      var headers = new HttpHeaders({
+        'Content-Type': undefined})
+        .set('authToken', authToken)
+        .set('Content-Type', undefined);
+      }else{
+        var headers = new HttpHeaders({
+          'Content-Type': undefined})
           .set('Content-Type', 'application/json');
       }
 

@@ -12,7 +12,8 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
   templateUrl: './exam.component.html',
   styleUrls: ['./exam.component.scss']
 })
-export class ExamComponent implements OnInit {
+export class ExamComponent
+ implements OnInit {
   scrollConfig = {
     suppressScrollX: true
   };

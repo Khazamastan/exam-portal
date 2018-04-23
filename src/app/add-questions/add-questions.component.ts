@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthenticationService } from '../service';
+
 
 @Component({
   selector: 'app-admin',
@@ -17,16 +19,18 @@ export class AdminAddComponent {
         private http : HttpClient,
         private frmBuilder: FormBuilder,
         private spinner: Ng4LoadingSpinnerService,
+        private authService: AuthenticationService
     ){ }
     onSubmit(e){
         this.isSubmitted = true;
         if(!this.answers.valid)
          return;
-         
+         var headers = this.authService.getHeadersMulti();
+
         const formData: FormData = new FormData();
         formData.append('fileKey', this.fileToUpload, this.fileToUpload.name);
         this.spinner.show();
-        const req = this.http.post(this.apiUrl, formData)
+        const req = this.http.post(this.apiUrl, formData, {headers})
         .subscribe(
             (res:any) => {
                 this.spinner.hide();
