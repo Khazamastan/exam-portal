@@ -42,7 +42,7 @@ export class AdminAddComponent {
         );
     }
     handleFileInput(files: FileList) {
-        this.fileToUpload = files[0];
+        this.fileToUpload = files.item(0);
     }
     ngOnInit(){
         this.answers = this.frmBuilder.group({
