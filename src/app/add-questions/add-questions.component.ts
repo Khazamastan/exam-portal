@@ -26,8 +26,8 @@ export class AdminAddComponent {
          return;
          var headers = this.authService.getHeadersMulti();
 
-        const formData: FormData = new FormData();
-        formData.append('fileKey', this.fileToUpload, this.fileToUpload.name);
+        const formData = new FormData();
+        formData.append('file', this.fileToUpload, this.fileToUpload.name);
         this.spinner.show();
         const req = this.http.post(this.apiUrl, formData, {headers})
         .subscribe(
@@ -42,7 +42,7 @@ export class AdminAddComponent {
         );
     }
     handleFileInput(files: FileList) {
-        this.fileToUpload = files.item(0);
+        this.fileToUpload = files[0];
     }
     ngOnInit(){
         this.answers = this.frmBuilder.group({
