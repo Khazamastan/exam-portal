@@ -4,7 +4,6 @@ import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from '../service';
 
-
 @Component({
   selector: 'app-admin',
   templateUrl: './add-questions.component.html',
@@ -37,7 +36,7 @@ export class AdminAddComponent {
                 console.log(res);
             },
             err => {
-                this.spinner.show();
+                this.spinner.hide();
                 console.log("Error occured");
             }
         );

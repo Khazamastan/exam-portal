@@ -79,7 +79,7 @@ export class AuthenticationService implements AuthService {
       }else{
         var headers = new HttpHeaders({
           'Content-Type': undefined})
-          .set('Content-Type', 'application/json');
+          .set('Content-Type', undefined);
       }
 
       return headers;
