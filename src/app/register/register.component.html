@@ -14,11 +14,17 @@
                     <p class="error-text" *ngIf="email.errors.required">
                         email is required.
                     </p>
+                    <p class="error-text" *ngIf="email.errors.pattern">
+                        email is not valid.
+                    </p>
                 </div>
                 <input type="phone" formControlName="mobileNumber" placeholder="Contact Number" />
                 <div class="form-control-feedback" *ngIf="mobileNumber.invalid && (mobileNumber.dirty || isSubmitted)">
                     <p class="error-text" *ngIf="mobileNumber.errors.required">
                         mobile number is required.
+                    </p>
+                    <p class="error-text" *ngIf="mobileNumber.errors.minLength">
+                        mobile number should be minimum 10 numbers.
                     </p>
                 </div>
                 <input type="text" formControlName="collegeCode" placeholder="college Code" />
@@ -45,11 +51,18 @@
                     <p class="error-text" *ngIf="password.errors.required">
                         password is required.
                     </p>
+                    {{password.errors.minLength}}
+                    <p class="error-text" *ngIf="password.errors.minLength">
+                        password should be minimum 8 letters
+                    </p>
                 </div>
                 <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" />
                 <div class="form-control-feedback" *ngIf="confirmPassword.invalid && (confirmPassword.dirty || isSubmitted)">
                     <p class="error-text" *ngIf="confirmPassword.errors.required">
                         confirm password is required.
+                    </p>
+                    <p class="error-text" *ngIf="confirmPassword.errors.minLength">
+                        confirm password should be minimum 8 letters
                     </p>
                 </div>
                 <button class="btn btn-full mt-20" type="submit">Sign Up</button>

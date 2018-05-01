@@ -17,7 +17,7 @@ import { AuthenticationService } from '../service';
 
 @Injectable()
 export class RegisterComponent {
-    apiUrl = 'http://localhost:9009/user/register';
+    apiUrl = 'http://139.59.58.70/user/register';
     newUser : FormGroup
     registered: boolean = false;
     loggedInUser;
@@ -26,22 +26,26 @@ export class RegisterComponent {
         id: "CSE"
     },{
         name : "Electronics and Communication Engineering",
-        id: "ece"
+        id: "ECE"
     },{
         name : "Electrical engineering",
-        id: "ee"
+        id: "EEE"
     },{
         name : "Mechanical Engineering",
-        id: "me"
+        id: "MECHANICAL"
     },{
-        name : "Information Technology Engineering",
-        id: "it"
+        name : "Arthimetics",
+        id: "ARTHIMETICS"
     },{
-        name : "Civil Engineering",
-        id: "ce"
+        name : "Reasoning",
+        id: "REASONING"
     },{
-        name : "Chemical Engineering",
-        id: "che"
+        name : "English",
+        id: "ENGLISH"
+    },
+    {
+        name : "MBA",
+        id: "MBA"
     }];
     isSubmitted: boolean = false;
     error;
@@ -54,33 +58,33 @@ export class RegisterComponent {
     ){}
     ngOnInit(){
         this.newUser = this.frmBuilder.group({
-            name:['1', Validators.required],
-            collegeCode:['1', Validators.required],
-            email:['1@gmail.com',
+            name:['', Validators.required],
+            collegeCode:['', Validators.required],
+            email:['',
                 [
                     Validators.required,
                     Validators.pattern("[^ @]*@[^ @]*")
                 ]
             ],
-            password: ['1',
+            password: ['',
+                [
+                    Validators.minLength(8),
+                    Validators.required
+                ]
+            ],
+            confirmPassword: ['',
                 [
                     Validators.minLength(8), 
                     Validators.required
                 ]
             ],
-            confirmPassword: ['1',
-                [
-                    Validators.minLength(8), 
-                    Validators.required
-                ]
-            ],
-            mobileNumber :['7207810602',
+            mobileNumber :['',
                 [
                     Validators.minLength(10),
                     Validators.required
                 ]
             ],
-            course: ['CSE', Validators.required]
+            course: ['', Validators.required]
 
         });
 
@@ -99,7 +103,7 @@ export class RegisterComponent {
     onSubmit(){
 
         this.isSubmitted = true;
-        if(this.newUser.dirty && this.newUser.errors)
+        if(!this.newUser.dirty || !this.newUser.valid)
          return;
          
         var body = this.newUser.value;

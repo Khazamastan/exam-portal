@@ -12,7 +12,7 @@ import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-    apiUrl = 'http://localhost:9009/user/login'
+    apiUrl = 'http://139.59.58.70/user/login'
     login : FormGroup
     isSubmitted: boolean = false;
     error;

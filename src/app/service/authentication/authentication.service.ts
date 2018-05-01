@@ -88,7 +88,7 @@ export class AuthenticationService implements AuthService {
     return this.tokenStorage
       .getRefreshToken()
       .switchMap((refreshToken: string) => {
-        return this.http.post(`http://localhost:9009/refresh`, { refreshToken });
+        return this.http.post(`http://139.59.58.70/refresh`, { refreshToken });
       })
       .do(this.saveAccessData.bind(this))
       .catch((err) => {
@@ -126,7 +126,7 @@ export class AuthenticationService implements AuthService {
   public login(data): Observable<any> {
     this.spinner.show();
     var headers = this.getHeaders()
-    return this.http.post(`http://localhost:9009/user/login`, data, {headers : headers})
+    return this.http.post(`http://139.59.58.70/user/login`, data, {headers : headers})
     .do((res: any) => {
       if(res.status){
         const tokens = {
@@ -146,10 +146,11 @@ export class AuthenticationService implements AuthService {
    * Logout
    */
   public logout(): void {
-    debugger;
+    this.spinner.show();
     var headers = this.getHeaders();
-    const res =  this.http.post(`http://localhost:9009/user/logout`, JSON.stringify({}), {headers : headers}).subscribe((res) => {
+    const res =  this.http.post(`http://139.59.58.70/user/logout`, JSON.stringify({}), {headers : headers}).subscribe((res) => {
       this.tokenStorage.clear();
+      this.spinner.hide();
       this.router.navigate(['/user/login']);
 
     })

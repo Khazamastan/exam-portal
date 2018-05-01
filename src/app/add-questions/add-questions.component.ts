@@ -10,7 +10,7 @@ import { AuthenticationService } from '../service';
   styleUrls: ['./add-questions.component.scss']
 })
 export class AdminAddComponent {
-    apiUrl = 'http://localhost:9009/exam/uploadExcel';
+    apiUrl = 'http://139.59.58.70:9009/exam/uploadExcel';
     answers: FormGroup;
     isSubmitted: boolean = false;
     fileToUpload: File;

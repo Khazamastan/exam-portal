@@ -27,6 +27,7 @@
   font-weight: 500;
 }
 .admin-page {
+  
   margin: 0 auto auto auto;
   .content{
     max-width: 80%;
@@ -49,9 +50,6 @@
         th{
           background: $success-color;
           color: #fff;
-          &:nth-child(even) {
-              background-color: #f5f5f5;
-          }
         }
       }
     }
