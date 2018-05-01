@@ -9,7 +9,7 @@ import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
   styleUrls: ['./viewResults.component.scss']
 })
 export class AdminResultsComponent {
-    getResultUrl = 'http://139.59.58.70/exam/get-results';
+    getResultUrl = 'http://139.59.58.70:9009/exam/get-results';
     onSubmit(e){
         //TODO : Do login here.
     }

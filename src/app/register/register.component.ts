@@ -17,7 +17,7 @@ import { AuthenticationService } from '../service';
 
 @Injectable()
 export class RegisterComponent {
-    apiUrl = 'http://139.59.58.70/user/register';
+    apiUrl = 'http://139.59.58.70:9009/user/register';
     newUser : FormGroup
     registered: boolean = false;
     loggedInUser;

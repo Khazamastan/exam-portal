@@ -17,9 +17,9 @@ export class ExamComponent
   scrollConfig = {
     suppressScrollX: true
   };
-  getTestUrl = 'http://139.59.58.70/exam/get-questions';
-  submitQuestionUrl = 'http://139.59.58.70/exam/submit-question';
-  submitTestUrl = 'http://139.59.58.70/exam/submit-test';
+  getTestUrl = 'http://139.59.58.70:9009/exam/get-questions';
+  submitQuestionUrl = 'http://139.59.58.70:9009/exam/submit-question';
+  submitTestUrl = 'http://139.59.58.70:9009/exam/submit-test';
   questions = [];
   selectedAnswer = "";
   currentQuestion;
