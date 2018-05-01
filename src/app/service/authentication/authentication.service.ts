@@ -72,14 +72,11 @@ export class AuthenticationService implements AuthService {
   public getHeadersMulti() : any{
     var authToken = localStorage.getItem('accessToken');      
     if(authToken){
-      var headers = new HttpHeaders({
-        'Content-Type': 'multipart/form-data'})
+      var headers = new HttpHeaders()
         .set('authToken', authToken)
-        .set('Content-Type', 'multipart/form-data');
+        ;
       }else{
-        var headers = new HttpHeaders({
-          'Content-Type': 'multipart/form-data'})
-          .set('Content-Type', 'multipart/form-data');
+        var headers = new HttpHeaders();
       }
 
       return headers;
