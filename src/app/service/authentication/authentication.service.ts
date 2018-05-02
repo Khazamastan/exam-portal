@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from 'ngx-auth';
-import { _site } from '../index'; 
+const _site = 'http://139.59.58.70:9009';
 import { TokenStorage } from './token-storage.service';
 import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 import {Router} from "@angular/router";
