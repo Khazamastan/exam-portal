@@ -2,7 +2,7 @@
     <div class="login-page">
         <div class="form">
             <h1>Login</h1>
-            <form (ngSubmit)="onSubmit($event)" [formGroup]='login' novalidate>
+            <form (ngSubmit)="onSubmit()" [formGroup]='login' novalidate>
                 <input type="text" formControlName="username" placeholder="username" />
                 <div class="form-control-feedback" *ngIf="username.invalid && (username.dirty || isSubmitted)">
                     <p class="error-text" *ngIf="username.errors.required">
