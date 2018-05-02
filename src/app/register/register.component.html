@@ -23,7 +23,7 @@
                     <p class="error-text" *ngIf="mobileNumber.errors.required">
                         mobile number is required.
                     </p>
-                    <p class="error-text" *ngIf="mobileNumber.errors.minLength">
+                    <p class="error-text" *ngIf="mobileNumber.errors.minlength">
                         mobile number should be minimum 10 numbers.
                     </p>
                 </div>
@@ -51,8 +51,7 @@
                     <p class="error-text" *ngIf="password.errors.required">
                         password is required.
                     </p>
-                    {{password.errors.minLength}}
-                    <p class="error-text" *ngIf="password.errors.minLength">
+                    <p class="error-text" *ngIf="password.errors.minlength">
                         password should be minimum 8 letters
                     </p>
                 </div>
@@ -61,7 +60,7 @@
                     <p class="error-text" *ngIf="confirmPassword.errors.required">
                         confirm password is required.
                     </p>
-                    <p class="error-text" *ngIf="confirmPassword.errors.minLength">
+                    <p class="error-text" *ngIf="confirmPassword.errors.minlength">
                         confirm password should be minimum 8 letters
                     </p>
                 </div>
