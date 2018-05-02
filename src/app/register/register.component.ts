@@ -7,6 +7,9 @@ import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 import "rxjs/add/operator/map";
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 import { AuthenticationService } from '../service';
+import { PasswordValidation } from './password-validation';
+
+
 
 @Component({
   selector: 'app-register',
@@ -86,6 +89,9 @@ export class RegisterComponent {
             ],
             course: ['', Validators.required]
 
+        },
+        {
+            validator: PasswordValidation.MatchPassword // your validation method
         });
 
         this.newUser.valueChanges.subscribe(val => {
