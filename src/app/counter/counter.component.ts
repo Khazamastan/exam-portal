@@ -18,7 +18,7 @@ export class AppCounter implements OnInit, OnDestroy {
     private futureString: string;
     private $counter: Observable<number>;
     private subscription: Subscription;
-    private message: string;
+    message: string;
 
     constructor(elm: ElementRef, private router: Router, private counter: CounterService) {
         this.futureString = elm.nativeElement.getAttribute('inputDate');
