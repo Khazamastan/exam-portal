@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthenticationService } from '../service';
+import { AuthenticationService, _site } from '../service';
 
 @Component({
   selector: 'app-admin',
@@ -10,7 +10,7 @@ import { AuthenticationService } from '../service';
   styleUrls: ['./add-questions.component.scss']
 })
 export class AdminAddComponent {
-    apiUrl = 'http://139.59.58.70:9009/exam/uploadExcel';
+    apiUrl = `${_site}/exam/uploadExcel`;
     answers: FormGroup;
     isSubmitted: boolean = false;
     fileToUpload: File;
