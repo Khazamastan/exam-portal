@@ -64,7 +64,7 @@
                         confirm password should be minimum 8 letters
                     </p>
                 </div>
-                <button class="btn btn-full mt-20" type="submit">Sign Up</button>
+                <button class="btn btn-full mt-20" type="submit" [disabled]="!newUser.valid">Sign Up</button>
                 <!-- {{this.props.error ? <p class="error-text">{{this.props.error ? "Username or DOB is wrong, Please Correct" : ""}</p> : null} -->
                 <p class="error-text">{{error}}</p>
             </form>
