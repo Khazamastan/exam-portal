@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from 'ngx-auth';
+import { _site } from '../index'; 
 import { TokenStorage } from './token-storage.service';
 import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 import {Router} from "@angular/router";
@@ -85,7 +86,7 @@ export class AuthenticationService implements AuthService {
     return this.tokenStorage
       .getRefreshToken()
       .switchMap((refreshToken: string) => {
-        return this.http.post(`http://139.59.58.70:9009/refresh`, { refreshToken });
+        return this.http.post(`${_site}refresh`, { refreshToken });
       })
       .do(this.saveAccessData.bind(this))
       .catch((err) => {
@@ -123,7 +124,7 @@ export class AuthenticationService implements AuthService {
   public login(data): Observable<any> {
     this.spinner.show();
     var headers = this.getHeaders()
-    return this.http.post(`http://139.59.58.70:9009/user/login`, data, {headers : headers})
+    return this.http.post(`${_site}/user/login`, data, {headers : headers})
     .do((res: any) => {
       if(res.status){
         const tokens = {
@@ -145,7 +146,7 @@ export class AuthenticationService implements AuthService {
   public logout(): void {
     this.spinner.show();
     var headers = this.getHeaders();
-    const res =  this.http.post(`http://139.59.58.70:9009/user/logout`, JSON.stringify({}), {headers : headers}).subscribe((res) => {
+    const res =  this.http.post(`${_site}/user/logout`, JSON.stringify({}), {headers : headers}).subscribe((res) => {
       this.tokenStorage.clear();
       this.spinner.hide();
       this.router.navigate(['/user/login']);

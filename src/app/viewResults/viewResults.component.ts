@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthenticationService } from '../service';
+import { AuthenticationService, _site } from '../service';
 import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 
 @Component({
@@ -9,7 +9,7 @@ import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
   styleUrls: ['./viewResults.component.scss']
 })
 export class AdminResultsComponent {
-    getResultUrl = 'http://139.59.58.70:9009/exam/get-results';
+    getResultUrl = `${_site}/exam/get-results`;
     onSubmit(e){
         //TODO : Do login here.
     }

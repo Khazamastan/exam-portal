@@ -3,7 +3,7 @@ import {Login} from "./login";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService } from '../service';
+import { AuthenticationService, _site } from '../service';
 import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 
 @Component({
@@ -12,7 +12,7 @@ import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-    apiUrl = 'http://139.59.58.70:9009/user/login'
+    apiUrl = `${_site}/user/login`
     login : FormGroup
     isSubmitted: boolean = false;
     error;

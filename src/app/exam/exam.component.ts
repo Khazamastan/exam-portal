@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiMapping } from "../../assets/data/apiMapping";
 import { CounterService } from "../service/counter.service";
 import { Router } from "@angular/router";
-import { AuthenticationService } from '../service';
+import { AuthenticationService, _site } from '../service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
@@ -17,9 +17,9 @@ export class ExamComponent
   scrollConfig = {
     suppressScrollX: true
   };
-  getTestUrl = 'http://139.59.58.70:9009/exam/get-questions';
-  submitQuestionUrl = 'http://139.59.58.70:9009/exam/submit-question';
-  submitTestUrl = 'http://139.59.58.70:9009/exam/submit-test';
+  getTestUrl = `${_site}/exam/get-questions`;
+  submitQuestionUrl = `${_site}/exam/submit-question`;
+  submitTestUrl = `${_site}/exam/submit-test`;
   questions = [];
   selectedAnswer = "";
   currentQuestion;

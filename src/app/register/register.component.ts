@@ -6,7 +6,7 @@ import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 
 import "rxjs/add/operator/map";
 import { FormGroup, FormBuilder, Validators,FormControl  } from '@angular/forms';
-import { AuthenticationService } from '../service';
+import { AuthenticationService, _site } from '../service';
 import { PasswordValidation } from './password-validation';
 
 
@@ -20,7 +20,7 @@ import { PasswordValidation } from './password-validation';
 
 @Injectable()
 export class RegisterComponent {
-    apiUrl = 'http://139.59.58.70:9009/user/register';
+    apiUrl = `${_site}/user/register`;
     newUser : FormGroup
     registered: boolean = false;
     loggedInUser;
