@@ -63,7 +63,7 @@
                     <p class="error-text" *ngIf="confirmPassword.errors.minlength">
                         confirm password should be minimum 8 letters
                     </p>
-                    <p class="error-text" *ngIf="form.controls.confirmPassword.errors?.MatchPassword">Password not match</p>
+                    <p class="error-text" *ngIf="confirmPassword.errors?.MatchPassword">Password not match</p>
                 </div>
                 <button class="btn btn-full mt-20" type="submit" [disabled]="!newUser.valid">Sign Up</button>
                 <!-- {{this.props.error ? <p class="error-text">{{this.props.error ? "Username or DOB is wrong, Please Correct" : ""}</p> : null} -->
