@@ -15,6 +15,7 @@ export class AdminResultsComponent {
     }
     results = [];
     loggedInUser;
+    currentPage = 1;
     constructor(
       private http : HttpClient,
       private authService: AuthenticationService,
