@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 
 import "rxjs/add/operator/map";
-import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators,FormControl  } from '@angular/forms';
 import { AuthenticationService } from '../service';
 import { PasswordValidation } from './password-validation';
 
@@ -105,12 +105,23 @@ export class RegisterComponent {
     get mobileNumber() { return this.newUser.get('mobileNumber'); }
     get course() { return this.newUser.get('course'); }
     get confirmPassword() { return this.newUser.get('confirmPassword'); }
-    
+    validateAllFormFields(formGroup: FormGroup) {         //{1}
+        Object.keys(formGroup.controls).forEach(field => {  //{2}
+            const control = formGroup.get(field);             //{3}
+            if (control instanceof FormControl) {             //{4}
+            control.markAsTouched({ onlySelf: true });
+            } else if (control instanceof FormGroup) {        //{5}
+            this.validateAllFormFields(control);            //{6}
+            }
+        });
+    }
     onSubmit(){
 
         this.isSubmitted = true;
-        if(!this.newUser.dirty || !this.newUser.valid)
-         return;
+        if(!this.newUser.dirty || !this.newUser.valid){
+            this.validateAllFormFields(this.newUser);
+            return;
+        }
          
         var body = this.newUser.value;
 

@@ -105,6 +105,10 @@ html,
   &.bt-sm{
     padding: 10px 20px;
   }
+  &:disabled{
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 .btn:hover,.btn:active,.btn:focus {
   background: #0099ff;
