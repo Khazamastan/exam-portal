@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from 'ngx-auth';
-const _site = 'http://139.59.58.70:9009';
+const _site = 'http://139.59.58.70:8080';
 import { TokenStorage } from './token-storage.service';
 import { Ng4LoadingSpinnerService  } from 'ng4-loading-spinner';
 import {Router} from "@angular/router";
@@ -57,11 +57,12 @@ export class AuthenticationService implements AuthService {
    * @returns {Observable<any>}
    */
   public getHeaders() : any{
-    var authToken = localStorage.getItem('accessToken');      
+    var authToken = localStorage.getItem('accessToken');
     if(authToken){
       var headers = new HttpHeaders({
         'Content-Type': 'application/json'})
-        .set('authToken', authToken);
+        .set('authToken', authToken)
+        .set('Content-Type', 'application/json');
       }else{
         var headers = new HttpHeaders({
           'Content-Type': 'application/json'})
