@@ -124,6 +124,7 @@ export class RegisterComponent {
         }
          
         var body = this.newUser.value;
+        body.email = body.email.toLowerCase();
 
 
     var headers = this.authService.getHeaders();
