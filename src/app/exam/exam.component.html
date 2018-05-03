@@ -3,15 +3,15 @@
     <h1 class="heading">Welcome, User</h1>
     <app-logout></app-logout>
   </section>
-  <div *ngIf="!testCompleted && started" class="test-progress">
+  <div *ngIf="!testCompleted && started && currentQuestion" class="test-progress">
     <section class="info-badge">
       <p>Question : {{questionIndex+1}}</p>
       <p>
-        Time Remaining: 
+        Time Remaining:
         <app-counter mills="{{mills}}"></app-counter>
       </p>
     </section>
-    <div class="exam-content" *ngIf="currentQuestion">
+    <div class="exam-content">
       <section class="current-question">
         <p class="question-desc" *ngIf="currentQuestion.hasImage">
           <!-- <img [src]="currentQuestion.question" /> -->
@@ -20,15 +20,8 @@
         <ul>
           <li *ngFor="let answer of currentQuestion.answerList; let i = index">
             <label for="{{i+1}}">
-              <input 
-                type="radio" 
-                id="{{i+1}}" 
-                class="option-input radio" 
-                name="selectedAnswer" 
-                [value]="answer.answerId" 
-                [checked]="answer.answerId == currentQuestion.answerId" 
-                (change)="setCurrentAnswer(currentQuestion.questionId, answer.answerId)"
-                />
+              <input type="radio" id="{{i+1}}" class="option-input radio" name="selectedAnswer" [value]="answer.answerId" [checked]="answer.answerId == currentQuestion.answerId"
+                (change)="setCurrentAnswer(currentQuestion.questionId, answer.answerId)" />
               <span *ngIf="answer.hasImage">
                 <!-- <img [src]="answer.answer" /> -->
               </span>
@@ -51,17 +44,17 @@
       </section>
       <section class="all-questions">
         <perfect-scrollbar style="max-height: calc(100vh - 100px);" [config]="scrollConfig">
-            <ul>
-                <li *ngFor="let question of questions; let i = index" id="{{question.questionId}}" (click)="setCurrentQuestionIndex(i)" [ngClass]="{'active': (currentQuestion.questionId == question.questionId), 'answered' : question.answerId}">
-                  <a>{{i+1}}</a>
-                </li>
-              </ul>
+          <ul>
+            <li *ngFor="let question of questions; let i = index" id="{{question.questionId}}" (click)="setCurrentQuestionIndex(i)" [ngClass]="{'active': (currentQuestion.questionId == question.questionId), 'answered' : question.answerId}">
+              <a>{{i+1}}</a>
+            </li>
+          </ul>
         </perfect-scrollbar>
       </section>
+    </div>
   </div>
   <div *ngIf="!currentQuestion">
-    <h4>No Questions Added.</h4>
-  </div>
+    <h1 class="text-center mt-20">No Questions Added.</h1>
   </div>
   <div class="test-completed" *ngIf="testCompleted">
     <img [src]="testCompletedImage" />
