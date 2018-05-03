@@ -143,7 +143,7 @@ export class ExamComponent
     if(questions.length){
       this.setCurrentQuestionIndex(index);
     }else{
-      this.getAdmin();
+      // this.getAdmin();
     }
     var time = parseInt(localStorage.getItem('timeElapsed'));
     if (time || questionsList.timeRemaining)
