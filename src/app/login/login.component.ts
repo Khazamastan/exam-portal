@@ -34,7 +34,7 @@ export class LoginComponent {
         const req = this.authService.login(body).subscribe((res:any) => {
                 debugger;
                 if(res && res.status){
-                    console.log(res);
+                    console.log("Success");
                     if(res.result.userRole == "Admin"){
                           this.router.navigate(['/admin']);
                       }else if(res.result.userRole == "Student"){
@@ -49,7 +49,7 @@ export class LoginComponent {
             },
             err => {
                 this.spinner.hide();
-                console.log("Error occured");
+                console.log("Error occured", err);
             }
         );
     }

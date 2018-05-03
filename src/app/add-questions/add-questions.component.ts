@@ -33,11 +33,11 @@ export class AdminAddComponent {
         .subscribe(
             (res:any) => {
                 this.spinner.hide();
-                console.log(res);
+                console.log("Success");
             },
             err => {
                 this.spinner.hide();
-                console.log("Error occured");
+                console.log("Error occured", err);
             }
         );
     }

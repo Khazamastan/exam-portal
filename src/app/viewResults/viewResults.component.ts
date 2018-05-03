@@ -45,10 +45,10 @@ export class AdminResultsComponent {
             }else{
             }
             this.spinner.hide();
-            console.log(res)
-        }, (res:any) => {
+            console.log("Success");
+        }, (err:any) => {
             this.spinner.hide();
-            console.log(res);
+            console.log(err);
         })
     }
 }

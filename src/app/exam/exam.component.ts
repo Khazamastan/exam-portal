@@ -68,7 +68,7 @@ export class ExamComponent
         },
         err => {
 
-          console.log("Error occured");
+          console.log("Error occured", err);
         }
       );
   }
@@ -82,7 +82,7 @@ export class ExamComponent
         },
         err => {
 
-          console.log("Error occured");
+          console.log("Error occured", err);
         }
       );
   }
@@ -92,7 +92,7 @@ export class ExamComponent
     this.spinner.show();
     const req = this.http.post(this.submitTestUrl, JSON.stringify(body), { headers })
       .subscribe((res: any) => {
-        console.log(res);
+        console.log("Success");
         if (res && res.status) {
           this.testCompleted = true;
         }
@@ -100,7 +100,7 @@ export class ExamComponent
       },
         err => {
           this.spinner.hide();
-          console.log("Error occured");
+          console.log("Error occured", err);
         }
       );
 
@@ -167,10 +167,10 @@ export class ExamComponent
           }
           this.spinner.hide();
         }
-        console.log(res)
+        console.log("Success");
       }, (res: any) => {
         this.spinner.hide();
-        console.log(res);
+        console.log("Success");
       })
   }
   startCounter(timeElapsed) {

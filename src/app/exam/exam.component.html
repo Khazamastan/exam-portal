@@ -11,7 +11,7 @@
         <app-counter mills="{{mills}}"></app-counter>
       </p>
     </section>
-    <div class="exam-content">
+    <div class="exam-content" *ngIf="currentQuestion">
       <section class="current-question">
         <p class="question-desc" *ngIf="currentQuestion.hasImage">
           <!-- <img [src]="currentQuestion.question" /> -->

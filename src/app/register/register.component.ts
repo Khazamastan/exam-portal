@@ -132,7 +132,7 @@ export class RegisterComponent {
         .subscribe((data:any) => {
             debugger;
             if(data && data.status){
-                console.log(data);
+                console.log("Success");
                 this.registered = true;
                 setTimeout(() => {
                     this.router.navigate(['/user/login']);
@@ -140,11 +140,11 @@ export class RegisterComponent {
             }else{
                 this.error = data.errorObject.errorMessage
             }
-            console.log(data)
+            console.log("Success");
             this.spinner.hide();
-        }, (res:any) => {
+        }, (err:any) => {
             this.spinner.hide();
-            console.log(res);
+            console.log(err);
         })
     }
 }
