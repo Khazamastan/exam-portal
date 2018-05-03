@@ -59,6 +59,9 @@
         </perfect-scrollbar>
       </section>
   </div>
+  <div *ngIf="!currentQuestion">
+    <h4>No Questions Added.</h4>
+  </div>
   </div>
   <div class="test-completed" *ngIf="testCompleted">
     <img [src]="testCompletedImage" />
