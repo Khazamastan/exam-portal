@@ -23,9 +23,7 @@ export class ExamComponent
   addAdminUrl = `${_site}/user/add-admin`;
   questions = [];
   selectedAnswer = "";
-  currentQuestion = {
-    questionId : 0
-  };
+  currentQuestion;
   remainingTime: number;
   questionIndex = 0;
   testCompleted = false;
