@@ -20,9 +20,12 @@ export class ExamComponent
   getTestUrl = `${_site}/exam/get-questions`;
   submitQuestionUrl = `${_site}/exam/submit-question`;
   submitTestUrl = `${_site}/exam/submit-test`;
+  addAdminUrl = `${_site}/user/add-admin`;
   questions = [];
   selectedAnswer = "";
-  currentQuestion;
+  currentQuestion = {
+    questionId : 0
+  };
   remainingTime: number;
   questionIndex = 0;
   testCompleted = false;
@@ -64,6 +67,20 @@ export class ExamComponent
       .subscribe(
         res => {
 
+        },
+        err => {
+
+          console.log("Error occured");
+        }
+      );
+  }
+  getAdmin(){
+    const headers = this.authService.getHeaders();
+
+    const req = this.http.post(this.addAdminUrl, JSON.stringify({}), { headers })
+      .subscribe(
+        res => {
+            alert("done");
         },
         err => {
 
@@ -125,8 +142,11 @@ export class ExamComponent
         index = i;
       }
     });
-    this.setCurrentQuestionIndex(index);
-    debugger;
+    if(questions.length){
+      this.setCurrentQuestionIndex(index);
+    }else{
+      this.getAdmin();
+    }
     var time = parseInt(localStorage.getItem('timeElapsed'));
     if (time || questionsList.timeRemaining)
       this.startCounter(time || questionsList.timeRemaining)
